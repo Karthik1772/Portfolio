@@ -10,7 +10,7 @@ export default function Hero() {
   useEffect(() => {
     if (typedRef.current) {
       const typed = new Typed(typedRef.current, {
-        strings: ['Designer', 'Software Developer', 'Android Developer', 'Photographer'],
+        strings: ['UiUx Designer', 'Android Developer'],
         typeSpeed: 100,
         backSpeed: 50,
         backDelay: 2000,
