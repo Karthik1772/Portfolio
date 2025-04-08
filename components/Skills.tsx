@@ -8,29 +8,33 @@ interface Skill {
 }
 
 const skillsData: Skill[] = [
-  { name: 'HTML', percentage: 100 },
-  { name: 'CSS', percentage: 90 },
-  { name: 'Figma', percentage: 75 },
-  { name: 'Java', percentage: 80 },
-  { name: 'Dart', percentage: 90 },
   { name: 'Flutter', percentage: 85 },
+  { name: 'Android Studio', percentage: 85 },
+  { name: 'HTML & CSS', percentage: 75 },
+  { name: 'Java', percentage: 80 },
+  { name: 'Figma/Canva', percentage: 100 },
+  { name: 'C/C++', percentage: 90 },
+  { name: 'Git/GitHub', percentage: 90 },
 ];
 
 export default function Skills() {
   return (
     <section id="skills" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="text-left pl-10 xl:pl-32 mb-12">
-          <h2 className="text-3xl font-bold mb-4">Skills</h2>
-          <p className="text-muted-foreground">
-            My technical skills and expertise in various technologies and tools.
-          </p>
-        </div>
+        {/* Wrap both heading and bars inside max-w-6xl */}
+        <div className="max-w-6xl mx-auto">
+          <div className="text-left mb-12">
+            <h2 className="text-3xl font-bold mb-4">Skills</h2>
+            <p className="text-muted-foreground">
+              My technical skills and expertise in various technologies and tools.
+            </p>
+          </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {skillsData.map((skill) => (
-            <SkillBar key={skill.name} skill={skill} />
-          ))}
+          <div className="grid md:grid-cols-2 gap-8">
+            {skillsData.map((skill) => (
+              <SkillBar key={skill.name} skill={skill} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

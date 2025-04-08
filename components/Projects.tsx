@@ -37,17 +37,19 @@ export default function Projects() {
   return (
     <section id="services" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="text-left pl-10 xl:pl-32 mb-12">
-          <h2 className="text-3xl font-bold mb-4">Projects</h2>
-          <p className="text-muted-foreground">
-            Showcase of my technical projects and applications built with various technologies.
-          </p>
-        </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-left mb-12">
+            <h2 className="text-3xl font-bold mb-4">Projects</h2>
+            <p className="text-muted-foreground">
+              Showcase of my technical projects and applications built with various technologies.
+            </p>
+          </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
-          ))}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <ProjectCard key={index} {...project} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
