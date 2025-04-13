@@ -2,32 +2,32 @@ import { Code2, Wallet, Layout, Database, Terminal, Cloud } from 'lucide-react';
 
 const projects = [
   {
-    title: 'Resource Management Application',
-    description: 'Android application for educational resource management using Flutter and Node.js.',
+    title: 'Doozy ',
+    description: 'A clean, minimal to-do app designed to simplify daily task management.',
     icon: Database,
   },
   {
-    title: 'TIC TAC TOE App',
-    description: 'Interactive game application built with modern technologies.',
+    title: 'XoXo',
+    description: 'A custom-built Tic Tac Toe game with a clean Flutter architecture.',
     icon: Layout,
   },
   {
-    title: 'Expense Tracker',
-    description: 'Personal finance management application with intuitive interface.',
+    title: 'Xpenso',
+    description: 'A lightweight and intuitive expense tracker for managing your daily spending',
     icon: Wallet,
   },
   {
-    title: 'CLI Tools',
-    description: 'Collection of command-line utilities for developer productivity.',
+    title: 'Formify',
+    description: 'A modular Flutter app for building dynamic forms with reusable components and clean architecture.',
     icon: Terminal,
   },
   {
-    title: 'Code Editor Extensions',
-    description: 'VS Code extensions for enhanced development experience.',
+    title: 'Studentix',
+    description: 'A real-time student tracking app that instantly shows which student is logged in and actively using the system',
     icon: Code2,
   },
   {
-    title: 'Cloud Solutions',
+    title: 'Major project',
     description: 'Cloud-based applications and infrastructure solutions.',
     icon: Cloud,
   },
