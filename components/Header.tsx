@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUp, Menu, X, Github, Twitter, Instagram, Linkedin, Home, User, FileText, Layers, Mail, BarChart } from 'lucide-react';
+import { ArrowUp, Menu, X, Github, Twitter, Instagram, Linkedin, Home, User, FileText, Layers, Mail, BarChart, Trophy } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 
 const HoverBGColors: Record<string, string> = {
@@ -100,7 +100,8 @@ export default function Header() {
           <NavItem href="#about" icon={<User />} label="About" isActive={activeSection === 'about'} setIsMenuOpen={setIsMenuOpen} />
           <NavItem href="#skills" icon={<BarChart />} label="Skills" isActive={activeSection === 'skills'} setIsMenuOpen={setIsMenuOpen} />
           <NavItem href="#resume" icon={<FileText />} label="Resume" isActive={activeSection === 'resume'} setIsMenuOpen={setIsMenuOpen} />
-          <NavItem href="#services" icon={<Layers />} label="Projects" isActive={activeSection === 'services'} setIsMenuOpen={setIsMenuOpen} />
+          <NavItem href="#projects" icon={<Layers />} label="Projects" isActive={activeSection === 'projects'} setIsMenuOpen={setIsMenuOpen} />
+          <NavItem href="#achievements" icon={<Trophy />} label="Achievements" isActive={activeSection === 'achievements'} setIsMenuOpen={setIsMenuOpen} />
           <NavItem href="#contact" icon={<Mail />} label="Contact" isActive={activeSection === 'contact'} setIsMenuOpen={setIsMenuOpen} />
           <ThemeToggle />
         </ul>
