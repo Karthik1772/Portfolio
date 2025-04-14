@@ -2,7 +2,7 @@ import {  Wallet, Layout, Database, Terminal, Cloud , User2} from 'lucide-react'
 
 const projects = [
   {
-    image:'/img/doozy.jpg',
+    image:'/img/icons/doozy.jpg',
     title: 'Doozy',
     description: 'A clean, minimal to-do app designed to simplify daily task management.',
     icon: Database,
@@ -10,7 +10,7 @@ const projects = [
     liveLink:'https://github.com/Karthik1772/Doozy/releases/download/v1.0.0/Doozy.apk'
   },
   {
-    image:'/img/xoxo.jpg',
+    image:'/img/icons/xoxo.jpg',
     title: 'XoXo',
     description: 'A custom-built Tic Tac Toe game with a clean Flutter architecture.',
     icon: Layout,
@@ -18,7 +18,7 @@ const projects = [
     liveLink:'https://github.com/Karthik1772/XoXo/releases/download/v1.0.0/XoXo.apk'
   },
   {
-    image:'/img/xpenso.jpg',
+    image:'/img/icons/xpenso.jpg',
     title: 'Xpenso',
     description: 'A lightweight and intuitive expense tracker for managing your daily spending',
     icon: Wallet,
@@ -26,11 +26,12 @@ const projects = [
     liveLink:'https://github.com/Karthik1772/Xpenso/releases/download/v1.0.0/Xpenso.apk'
   },
   {
-    image:'/img/formify.jpg',
+    image:'/img/icons/formify.jpg',
     title: 'Formify',
     description: 'A modular Flutter app for building dynamic forms with reusable components and clean architecture.',
     icon: Terminal,
     github:'https://github.com/Karthik1772/Formify',
+    liveLink:'https://github.com/Karthik1772'
   },
   {
     
@@ -38,11 +39,14 @@ const projects = [
     description: 'A real-time student tracking app that instantly shows which student is logged in and actively using the system',
     icon: User2,
     github:'https://github.com/Karthik1772/resource-managment',
+    liveLink:'https://github.com/Karthik1772'
   },
   {
     title: 'Major project',
     description: 'Cloud-based applications and infrastructure solutions.',
-    icon: Cloud
+    icon: Cloud,
+    github:'https://github.com/Karthik1772/',
+    liveLink:'https://github.com/Karthik1772'
   },
 ];
 
