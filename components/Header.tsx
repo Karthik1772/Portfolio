@@ -57,8 +57,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 bottom-0 w-[300px] z-50"
-    >
+    <header className={`fixed top-0 left-0 bottom-0 ${isMenuOpen ? 'w-[300px] z-50' : 'z-10'}`}>
       <button
         className={`lg:hidden fixed top-4 right-4 sm:right-4   p-2 rounded-full ${isScrolled ? 'bg-primary text-background' : 'bg-background text-primary'}`}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
