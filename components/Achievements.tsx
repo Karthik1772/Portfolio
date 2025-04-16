@@ -1,7 +1,7 @@
 'use client';
-import {  Wallet, Layout, Database, Terminal, Cloud , User2, Club, Computer} from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 import Autoplay from 'embla-carousel-autoplay'
+
 const achievements = [
   {
     name: "Mathematics Day",
@@ -71,13 +71,8 @@ const achievements = [
       '/img/fusion/1.jpg',
       '/img/fusion/2.jpg',
     ],
-    description: "Thrilled to share that our team secured 1st place in the Fusion Tecathon 3.0 organized by the Department of AIML at Alva's Institute of Engineering and Technology ! 🏆✨"
+    description: "Thrilled to share that our team secured 1st place in the Fusion Tecathon 3.0 organized by the Department of AIML at Alva's Institute of Engineering and Technology !"
   },
-  
-  
-
-  
-  
 ]
 
 export default function Achievements() {
@@ -87,7 +82,7 @@ export default function Achievements() {
         <div className="max-w-6xl mx-auto">
           <div className="text-left mb-12">
             <h2 className="text-3xl font-bold mb-4">Achievements</h2>
-            
+
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -102,32 +97,32 @@ export default function Achievements() {
 }
 
 function AchievementCarousel({ name, images, description }: {
-    name: string;
-    images: string[]
-    description?: string
-}){
-    return (
-        <div className="mb-8">
-            <h3 className="text-xl font-bold mb-4">{name}</h3>
-            <Carousel plugins={[
-                Autoplay({
-                    delay:5000
-                })
-            ]} >
-                <CarouselContent >
-                    
-                {images.map((image, index) => (
-                    <CarouselItem key={index} className='w-full h-full md:h-[200px] md:w-[300px]'>
-                        <img src={image} alt={name} className="object-cover" />
-                    </CarouselItem>
-                ))}
-                </CarouselContent>
-                {description && (
-                    <div className="text-muted-foreground mt-4">
-                        {description}
-                    </div>
-                )}
-            </Carousel>
-        </div>
-    )
+  name: string;
+  images: string[]
+  description?: string
+}) {
+  return (
+    <div className="mb-8">
+      <h3 className="text-xl font-bold mb-4">{name}</h3>
+      <Carousel plugins={[
+        Autoplay({
+          delay: 5000
+        })
+      ]} >
+        <CarouselContent >
+
+          {images.map((image, index) => (
+            <CarouselItem key={index} className='w-full h-full md:h-[200px] md:w-[300px]'>
+              <img src={image} alt={name} className="object-cover" />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        {description && (
+          <div className="text-muted-foreground mt-4">
+            {description}
+          </div>
+        )}
+      </Carousel>
+    </div>
+  )
 }
