@@ -16,7 +16,6 @@ const achievements = [
       '/img/stem/1.jpg',
       '/img/stem/2.jpg',
       '/img/stem/3.jpg',
-      '/img/stem/4.jpg',
     ],
     description: "Sparking future innovators! Had a blast leading a STEM workshop for Scouts&Guides showing them the power of Science, Technology, Engineering, and Maths ."
   },
@@ -35,7 +34,6 @@ const achievements = [
       '/img/symbiot/1.jpg',
       '/img/symbiot/2.jpg',
       '/img/symbiot/3.jpg',
-      '/img/symbiot/4.jpg'
     ],
     description: "Participated in a hackathon organized by Vidyavardhaka College of Engineering, engaging in collaborative problem-solving and innovative solution development in a competitive and professional setting."
   },
