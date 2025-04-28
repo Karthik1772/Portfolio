@@ -37,7 +37,7 @@ export default function Resume() {
               <div className="space-y-8">
                 <ResumeItem
                   title="Internship at InternPe"
-                  date="2023"
+                  date="06/2024 – 08/2024"
                   description={`• Gained hands-on experience in C++ development, improving algorithm efficiency and problem resolution capabilities.
                                 • As a C++ Developer Intern, I enhanced my analytical and troubleshooting skills by working with complex algorithms.`}
                 />
