@@ -93,7 +93,6 @@ export default function About() {
           iconColor="bg-purple-200"
           bulletPoints={[
             "Led initiatives in open-source development",
-            "Digitized college infrastructure",
             "Organized STEM sessions for over 100 Scouts and Guides",
           ]}
         />
@@ -102,8 +101,7 @@ export default function About() {
           icon={<Bird className="w-5 h-5 text-black" />}
           iconColor="bg-green-200"
           bulletPoints={[
-            "Documented bird species",
-            "Documented bird habitats",
+            "Documented bird species and habitats",
             "Delivered talk to over 3000 students at the International Cultural Jamboree",
           ]}
         />

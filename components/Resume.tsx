@@ -36,21 +36,19 @@ export default function Resume() {
               <h3 className="text-xl font-bold mb-6">Professional Experience</h3>
               <div className="space-y-8">
                 <ResumeItem
-                  title="Resource Management Application"
-                  date="2022"
-                  description={`• Created an Android application using Dart with Flutter framework
-                                • Processed user information using Node.js
-                                • Developed solution to benefit students and reduce paperwork
-                                • Modernized educational system through digitization`}
+                  title="Internship at InternPe"
+                  date="2023"
+                  description={`• Gained hands-on experience in C++ development, improving algorithm efficiency and problem resolution capabilities.
+                                • As a C++ Developer Intern, I enhanced my analytical and troubleshooting skills by working with complex algorithms.`}
                 />
-                <ResumeItem
+                {/* <ResumeItem
                   title="Expense Tracker App"
                   date="2023"
                   description={`• Developed Android expense tracking app using Flutter
                                 • Designed intuitive interface for expense management
                                 • Implemented categorization and spending insights
                                 • Created streamlined mobile budgeting solution`}
-                />
+                /> */}
               </div>
             </div>
           </div>

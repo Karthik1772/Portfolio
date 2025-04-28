@@ -9,8 +9,7 @@ interface Skill {
 
 const skillsData: Skill[] = [
   { name: 'Flutter', percentage: 85 },
-  { name: 'Android Studio', percentage: 85 },
-  { name: 'HTML & CSS', percentage: 75 },
+  { name: 'HTML & TailWind CSS', percentage: 75 },
   { name: 'Java', percentage: 80 },
   { name: 'Figma/Canva', percentage: 100 },
   { name: 'C/C++', percentage: 90 },
