@@ -92,8 +92,8 @@ export default function About() {
           icon={<User className="w-5 h-5 text-black" />}
           iconColor="bg-purple-200"
           bulletPoints={[
-            "Led initiatives in open-source development",
-            "Organized STEM sessions for over 100 Scouts and Guides",
+            "Student Leader, Edwin Lab (AIET): Led open-source software projects, fostering growth of students with hands-on development.",
+            "STEM Facilitator: Conducted sessions for 100+ Scouts & Guides across Karnataka, promoting science and technology.",
           ]}
         />
         <CoordinatorCard
@@ -101,8 +101,8 @@ export default function About() {
           icon={<Bird className="w-5 h-5 text-black" />}
           iconColor="bg-green-200"
           bulletPoints={[
-            "Documented bird species and habitats",
-            "Delivered talk to over 3000 students at the International Cultural Jamboree",
+            "Student Coordinator, Chirp Club (AIET): Led birding activities, documented species, and studied habitats and migration.",
+            "Speaker, International Cultural Jamboree: Represented Chirp Club and addressed 3000+ students on avian awareness.",
           ]}
         />
       </div>

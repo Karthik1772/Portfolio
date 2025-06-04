@@ -41,14 +41,13 @@ export default function Resume() {
                   description={`• Gained hands-on experience in C++ development, improving algorithm efficiency and problem resolution capabilities.
                                 • As a C++ Developer Intern, I enhanced my analytical and troubleshooting skills by working with complex algorithms.`}
                 />
-                {/* <ResumeItem
-                  title="Expense Tracker App"
-                  date="2023"
-                  description={`• Developed Android expense tracking app using Flutter
-                                • Designed intuitive interface for expense management
-                                • Implemented categorization and spending insights
-                                • Created streamlined mobile budgeting solution`}
-                /> */}
+                <ResumeItem
+                  title="Research Intern at IIIT Dharward"
+                  date="02/2025 - 05/2025"
+                  description={`• Completed a 12-week online internship at Indian Institute of Information Technology Dharwad, contributing to an AI-based app development for Reducing Carbon Footprints at Individual Level
+                                • As a Research Intern, I gained experience in developing and deploying multi state flutter apps.
+                                `}
+                />
               </div>
             </div>
           </div>

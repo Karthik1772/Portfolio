@@ -31,7 +31,7 @@ const projects = [
     description: 'A modular Flutter app for building dynamic forms with reusable components and clean architecture.',
     icon: Terminal,
     github: 'https://github.com/Karthik1772/Formify',
-    liveLink: 'https://github.com/Karthik1772'
+    liveLink: 'https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk'
   },
   {
     image: '/img/icons/studentix.jpg',
