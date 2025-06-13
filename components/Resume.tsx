@@ -1,13 +1,35 @@
+"use client";
+
+import { Download } from "lucide-react";
+
 export default function Resume() {
+  const handleDownloadResume = () => {
+    // For Google Drive files, use the direct download URL format
+    const fileId = '112JcMMxH1vLOM4bZeHQSaeHfImtK7dUR';
+    const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+
+    // Open in new tab to trigger download
+    window.open(downloadUrl, '_blank');
+  };
+
   return (
     <section id="resume" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-left mb-12">
-            <h2 className="text-3xl font-bold mb-4">Resume</h2>
-            <p className="text-muted-foreground">
-              My educational background and professional experience.
-            </p>
+          <div className="flex justify-between items-start mb-12">
+            <div className="text-left">
+              <h2 className="text-3xl font-bold mb-4">Resume</h2>
+              <p className="text-muted-foreground">
+                My educational background and professional experience.
+              </p>
+            </div>
+            <button
+              onClick={handleDownloadResume}
+              className="inline-flex items-center gap-2 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              <Download size={16} />
+              Download Resume
+            </button>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
@@ -39,14 +61,14 @@ export default function Resume() {
                   title="Internship at InternPe"
                   date="06/2024 – 08/2024"
                   description={`• Gained hands-on experience in C++ development, improving algorithm efficiency and problem resolution capabilities.
-                                • As a C++ Developer Intern, I enhanced my analytical and troubleshooting skills by working with complex algorithms.`}
+                               • As a C++ Developer Intern, I enhanced my analytical and troubleshooting skills by working with complex algorithms.`}
                 />
                 <ResumeItem
                   title="Research Intern at IIIT Dharward"
                   date="02/2025 - 05/2025"
                   description={`• Completed a 12-week online internship at Indian Institute of Information Technology Dharwad, contributing to an AI-based app development for Reducing Carbon Footprints at Individual Level
-                                • As a Research Intern, I gained experience in developing and deploying multi state flutter apps.
-                                `}
+                               • As a Research Intern, I gained experience in developing and deploying multi state flutter apps.
+                               `}
                 />
               </div>
             </div>

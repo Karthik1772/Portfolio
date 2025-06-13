@@ -76,7 +76,7 @@ export default function Header() {
         <div className="text-center mb-8">
           <div className="relative w-32 h-32 mx-auto mb-4 ">
             <Image
-              src="/img/my-profile-img.jpg"
+              src="/img/profile-img.jpg"
               alt="Profile"
               fill
               className="rounded-full border-8 border-muted"
@@ -130,8 +130,8 @@ function NavItem({ href, icon, label, isActive, setIsMenuOpen }: { href: string;
       <Link
         href={href}
         className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-300 ${isActive
-            ? 'bg-primary text-primary-foreground'
-            : 'hover:bg-muted text-muted-foreground hover:text-foreground'
+          ? 'bg-primary text-primary-foreground'
+          : 'hover:bg-muted text-muted-foreground hover:text-foreground'
           }`}
         onClick={() => {
           if (href !== '/') {

@@ -14,7 +14,7 @@ export default function Home() {
       <Skills />
       <Resume />
       <Projects />
-      <Achievements/>
+      <Achievements />
       <Contact />
     </main>
   );

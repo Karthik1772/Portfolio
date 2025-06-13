@@ -48,7 +48,7 @@ export default function About() {
           {/* Image */}
           <div className="relative w-full max-w-sm">
             <Image
-              src="/img/my-profile-img.jpg"
+              src="/img/profile-img.jpg"
               alt="Karthik S Kashyap"
               width={500}
               height={500}
