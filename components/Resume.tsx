@@ -8,8 +8,13 @@ export default function Resume() {
     const fileId = '112JcMMxH1vLOM4bZeHQSaeHfImtK7dUR';
     const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
 
-    // Open in new tab to trigger download
-    window.open(downloadUrl, '_blank');
+    // Create a temporary link element to trigger download in same tab
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = 'Karthik_S_Kashyap.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -79,7 +84,7 @@ export default function Resume() {
   );
 }
 
-function ResumeItem({ title, date, description }: { title: string; date: string; description: string }) {
+function ResumeItem({ title, date, description }: { title: string; date: any, description: string }) {
   return (
     <div className="border-l-2 border-primary pl-4">
       <h4 className="text-lg font-semibold mb-1">{title}</h4>
