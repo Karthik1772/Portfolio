@@ -1,43 +1,8 @@
 "use client";
 
 import { Download } from "lucide-react";
-import { useState } from "react";
 
 export default function Resume() {
-  const [isDownloading, setIsDownloading] = useState(false);
-
-  const handleDownload = async () => {
-    setIsDownloading(true);
-    try {
-      const response = await fetch('/resume/Karthik_S_Kashyap.pdf');
-      if (!response.ok) throw new Error('File not found');
-      
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'Karthik_S_Kashyap.pdf';
-      link.style.display = 'none';
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Clean up the URL object
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Download failed:', error);
-      // Fallback: try direct download in same tab
-      const link = document.createElement('a');
-      link.href = '/resume/Karthik_S_Kashyap.pdf';
-      link.download = 'Karthik_S_Kashyap.pdf';
-      link.click();
-    } finally {
-      setIsDownloading(false);
-    }
-  };
-
   return (
     <section id="resume" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -50,14 +15,15 @@ export default function Resume() {
               </p>
             </div>
 
-            <button
-              onClick={handleDownload}
-              disabled={isDownloading}
-              className="inline-flex items-center gap-2 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            <a href="/resume/Karthik_S_Kashyap.pdf"
+              download="Karthik_S_Kashyap.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors no-underline"
             >
               <Download size={16} />
-              {isDownloading ? 'Downloading...' : 'Download resume'}
-            </button>
+              Download resume
+            </a>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
