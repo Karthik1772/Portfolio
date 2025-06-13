@@ -15,8 +15,7 @@ export default function Resume() {
               </p>
             </div>
 
-            <a
-              href="/resume/Karthik_S_Kashyap.pdf"
+            <a href="/resume/Karthik_S_Kashyap.pdf"
               download="Karthik_S_Kashyap.pdf"
               target="_blank"
               rel="noopener noreferrer"
