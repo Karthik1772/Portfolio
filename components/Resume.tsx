@@ -4,11 +4,9 @@ import { Download } from "lucide-react";
 
 export default function Resume() {
   const handleDownloadResume = () => {
-    // For Google Drive files, use the direct download URL format
     const fileId = '112JcMMxH1vLOM4bZeHQSaeHfImtK7dUR';
     const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
 
-    // Create a temporary link element to trigger download in same tab
     const link = document.createElement('a');
     link.href = downloadUrl;
     link.download = 'Karthik_S_Kashyap.pdf';
