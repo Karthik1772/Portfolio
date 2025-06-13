@@ -23,7 +23,7 @@ export default function Resume() {
               className="inline-flex items-center gap-2 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors no-underline"
             >
               <Download size={16} />
-              Download Resume
+              Download Resum
             </a>
           </div>
 
