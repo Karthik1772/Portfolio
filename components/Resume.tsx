@@ -3,6 +3,15 @@
 import { Download } from "lucide-react";
 
 export default function Resume() {
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/resume/Karthik_S_Kashyap.pdf";
+    link.setAttribute("download", "Karthik_S_Kashyap.pdf");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section id="resume" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -15,15 +24,13 @@ export default function Resume() {
               </p>
             </div>
 
-            <a href="/resume/Karthik_S_Kashyap.pdf"
-              download="Karthik_S_Kashyap.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors no-underline"
+            <button
+              onClick={handleDownload}
+              className="inline-flex items-center gap-2 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
             >
               <Download size={16} />
               Download resume
-            </a>
+            </button>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
@@ -38,12 +45,12 @@ export default function Resume() {
                 <ResumeItem
                   title="Gopalaswamy PU College"
                   date="2022"
-                  description="Completed pre-university education with focus on science and mathematics with a overall Percentage of 87.5"
+                  description="Completed pre-university education with focus on science and mathematics with an overall percentage of 87.5"
                 />
                 <ResumeItem
                   title="Sadvidya High School"
                   date="2020"
-                  description="Completed secondary education with distinctional percentage of 93.28"
+                  description="Completed secondary education with a distinction percentage of 93.28"
                 />
               </div>
             </div>
@@ -55,13 +62,13 @@ export default function Resume() {
                   title="Internship at InternPe"
                   date="06/2024 – 08/2024"
                   description={`• Gained hands-on experience in C++ development, improving algorithm efficiency and problem resolution capabilities.
-                                • As a C++ Developer Intern, I enhanced my analytical and troubleshooting skills by working with complex algorithms.`}
+• As a C++ Developer Intern, I enhanced my analytical and troubleshooting skills by working with complex algorithms.`}
                 />
                 <ResumeItem
                   title="Research Intern at IIIT Dharward"
                   date="02/2025 - 05/2025"
-                  description={`• Completed a 12-week online internship at Indian Institute of Information Technology Dharwad, contributing to an AI-based app development for Reducing Carbon Footprints at Individual Level
-                                • As a Research Intern, I gained experience in developing and deploying multi state flutter apps.`}
+                  description={`• Completed a 12-week online internship at Indian Institute of Information Technology Dharwad, contributing to an AI-based app development for reducing carbon footprints at the individual level.
+• As a Research Intern, I gained experience in developing and deploying multi-state Flutter apps.`}
                 />
               </div>
             </div>
