@@ -4,12 +4,10 @@ import { Download } from "lucide-react";
 
 export default function Resume() {
   const handleDownloadResume = () => {
-    const fileId = '112JcMMxH1vLOM4bZeHQSaeHfImtK7dUR';
-    const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-
     const link = document.createElement('a');
-    link.href = downloadUrl;
+    link.href = '/resume/Karthik_S_Kashyap.pdf';
     link.download = 'Karthik_S_Kashyap.pdf';
+    link.target = '_self';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -82,7 +80,7 @@ export default function Resume() {
   );
 }
 
-function ResumeItem({ title, date, description }: { title: string; date: any, description: string }) {
+function ResumeItem({ title, date, description }: { title: string; date: string; description: string }) {
   return (
     <div className="border-l-2 border-primary pl-4">
       <h4 className="text-lg font-semibold mb-1">{title}</h4>
