@@ -3,16 +3,6 @@
 import { Download } from "lucide-react";
 
 export default function Resume() {
-  const handleDownloadResume = () => {
-    const link = document.createElement('a');
-    link.href = '/resume/Karthik_S_Kashyap.pdf';
-    link.download = 'Karthik_S_Kashyap.pdf';
-    link.target = '_self';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <section id="resume" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -24,13 +14,14 @@ export default function Resume() {
                 My educational background and professional experience.
               </p>
             </div>
-            <button
-              onClick={handleDownloadResume}
-              className="inline-flex items-center gap-2 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+            
+              <a href="/resume/Karthik_S_Kashyap.pdf"
+              download="Karthik_S_Kashyap.pdf"
+              className="inline-flex items-center gap-2 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors no-underline"
             >
               <Download size={16} />
               Download Resume
-            </button>
+            </a>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
