@@ -93,7 +93,7 @@ src/
 ## 📄 Resume
 
 A downloadable version of my resume is available directly on the website.
-📥 [Download Resume](https://karthik-s-kashyap.vercel.app/resume/Karthik_S_Kashyap.pdf)
+📥 [Download Resume](https://karthik-s-kashyap.vercel.app/#resume)
 
 ---
 
