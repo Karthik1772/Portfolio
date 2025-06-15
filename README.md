@@ -22,16 +22,16 @@ The portfolio was developed to:
 * 📄 Resume download functionality
 * 📬 Contact form with email integration
 * 🖼️ Project showcases with live demo and GitHub links
-* 🌙 Light/Dark theme toggle *(if implemented)*
+* 🌙 Light/Dark theme toggle 
 
 ---
 
 ## 🛠️ Tech Stack
 
 * **Framework**: [Next.js](https://nextjs.org/)
-* **Language**: JavaScript / TypeScript
+* **Language**: TypeScript
 * **Styling**: Tailwind CSS
-* **Icons**: Lucide-react / Heroicons
+* **Icons**: Lucide-react
 * **Deployment**: [Vercel](https://vercel.com/)
 * **Assets**: Next.js `Image`, `Link`, and dynamic routing
 * **IDE**: VS Code
@@ -90,20 +90,6 @@ src/
 
 ---
 
-## 📄 Resume
-
-A downloadable version of my resume is available directly on the website.
-📥 [Download Resume](https://karthik-s-kashyap.vercel.app/#resume)
-
----
-
-## 🧑‍💻 Author
-
-**Karthik S Kashyap**
-[GitHub](https://github.com/Karthik1772) • [LinkedIn](https://www.linkedin.com/in/karthik-s-kashyap-648908251/) • [Portfolio](https://karthik-s-kashyap.vercel.app/)
-
----
-
 ## 🤝 Contributing
 
 Have suggestions or want to contribute? Fork this repo and raise a pull request!
@@ -116,9 +102,10 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-## 🏁 Acknowledgments
+## 🧑‍💻 Author
 
-Thanks to the open-source community and design inspirations that helped shape this portfolio.
+**Karthik S Kashyap**
+[GitHub](https://github.com/Karthik1772) • [LinkedIn](https://www.linkedin.com/in/karthik-s-kashyap-648908251/) • [Portfolio](https://karthik-s-kashyap.vercel.app/)
 
 ---
 
