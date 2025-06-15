@@ -108,10 +108,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 [GitHub](https://github.com/Karthik1772) • [LinkedIn](https://www.linkedin.com/in/karthik-s-kashyap-648908251/) • [Portfolio](https://karthik-s-kashyap.vercel.app/)
 
 ---
-
-✅ **Next Steps (Optional but Recommended):**
-- Replace placeholder links (`your-username`) with your actual Vercel deployment link.
-- Add screenshots inside the `/public/screenshots` folder and reference them in the `README.md`.
-- Push it along with your project and publish!
-
-Let me know if you want a version with dynamic GitHub stats and badges too.
