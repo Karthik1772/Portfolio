@@ -33,21 +33,21 @@ const projects = [
     github: 'https://github.com/Karthik1772/Formify',
     liveLink: 'https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk'
   },
-  {
-    image: '/img/icons/studentix.jpg',
-    title: 'Studentix',
-    description: 'A real-time student tracking app that instantly shows which student is logged in and actively using the system',
-    icon: User2,
-    github: 'https://github.com/Karthik1772/resource-managment',
-    liveLink: 'https://github.com/Karthik1772'
-  },
-  {
-    title: 'Major project',
-    description: 'Cloud-based applications and infrastructure solutions.',
-    icon: Cloud,
-    github: 'https://github.com/Karthik1772/',
-    liveLink: 'https://github.com/Karthik1772'
-  },
+  // {
+  //   image: '/img/icons/studentix.jpg',
+  //   title: 'Studentix',
+  //   description: 'A real-time student tracking app that instantly shows which student is logged in and actively using the system',
+  //   icon: User2,
+  //   github: 'https://github.com/Karthik1772/resource-managment',
+  //   liveLink: 'https://github.com/Karthik1772'
+  // },
+  // {
+  //   title: 'Major project',
+  //   description: 'Cloud-based applications and infrastructure solutions.',
+  //   icon: Cloud,
+  //   github: 'https://github.com/Karthik1772/',
+  //   liveLink: 'https://github.com/Karthik1772'
+  // },
 ];
 
 export default function Projects() {
