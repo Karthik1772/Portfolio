@@ -20,7 +20,7 @@ const achievements = [
     description: "Sparking future innovators! Had a blast leading a STEM workshop for Scouts&Guides showing them the power of Science, Technology, Engineering, and Maths ."
   },
   {
-    name: "Algoriz Tecothon",
+    name: "Algoriz Technova",
     images: [
       '/img/algoriz/1.jpg',
       '/img/algoriz/2.jpg',
