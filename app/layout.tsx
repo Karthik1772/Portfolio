@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: 'Software Developer Portfolio of Karthik S Kashyap',
   keywords: ['software developer', 'portfolio', 'web development', 'react', 'next.js'],
   icons: {
-    icon: '/img/profile-img.jpg',
+    icon: '/img/favicon.png', 
     shortcut: '/img/favicon-16x16.png',
     apple: '/img/apple-touch-icon.png',
   },
