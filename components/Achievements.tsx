@@ -26,7 +26,7 @@ const achievements = [
       '/img/algoriz/2.jpg',
       '/img/algoriz/3.jpg',
     ],
-    description: "My team won Tecothon, organized by the Algoriz Club of the CSE department at Alva’s Institute of Engineering & Technology, Moodbidri."
+    description: "My team won Technova, organized by the Algoriz Club of the CSE department at Alva’s Institute of Engineering & Technology, Moodbidri."
   },
   {
     name: "Symbiot VVCE Hackathon",
