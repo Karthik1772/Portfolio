@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import emailjs from 'emailjs-com';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,19 +14,33 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const body = encodeURIComponent(`From: ${formData.name}
-Email: ${formData.email}
-Message:
-${formData.message}`);
-    window.open(
-      `https://mail.google.com/mail/?view=cm&fs=1&to=karthikamma2004@gmail.com&su=${formData.subject}&body=${body}`
-    );
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-    });
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+    };
+
+    try {
+      await emailjs.send(
+        'service_k611vwb', // Replace with your EmailJS Service ID
+        'template_72dya9b', // Replace with your EmailJS Template ID
+        templateParams,
+        'hVSrYv_vQ1C4sHIEE'   // Replace with your EmailJS Public Key
+      );
+
+      alert('Message sent successfully!');
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      alert('Failed to send message. Please try again later.');
+    }
   };
 
   const handleChange = (
