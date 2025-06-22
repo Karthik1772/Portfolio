@@ -34,6 +34,11 @@ export default function Contact() {
 
       toast.success('Message sent successfully!', {
         position: 'bottom-left',
+        style: {
+          background: 'hsl(var(--background))',
+          color: 'hsl(var(--foreground))',
+          border: '1px solid hsl(var(--border))',
+        },
       });
 
       setFormData({
@@ -46,6 +51,11 @@ export default function Contact() {
       console.error('EmailJS Error:', error);
       toast.error('Failed to send message. Please try again.', {
         position: 'bottom-left',
+        style: {
+          background: 'hsl(var(--background))',
+          color: 'hsl(var(--foreground))',
+          border: '1px solid hsl(var(--border))',
+        },
       });
     }
   };
@@ -61,7 +71,28 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 bg-background">
-      <Toaster /> {/* 👈 Add toast container */}
+      <Toaster 
+        position="bottom-left"
+        toastOptions={{
+          style: {
+            background: 'hsl(var(--background))',
+            color: 'hsl(var(--foreground))',
+            border: '1px solid hsl(var(--border))',
+          },
+          success: {
+            iconTheme: {
+              primary: 'hsl(var(--primary))',
+              secondary: 'hsl(var(--primary-foreground))',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: 'hsl(var(--destructive))',
+              secondary: 'hsl(var(--destructive-foreground))',
+            },
+          },
+        }}
+      />
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-left mb-12">
