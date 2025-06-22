@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import emailjs from 'emailjs-com';
 import toast, { Toaster } from 'react-hot-toast';
@@ -11,6 +11,40 @@ export default function Contact() {
     email: '',
     subject: '',
     message: '',
+  });
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check if dark mode is active
+    const checkDarkMode = () => {
+      const isDark = document.documentElement.classList.contains('dark') ||
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setIsDarkMode(isDark);
+    };
+
+    checkDarkMode();
+
+    // Listen for theme changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', checkDarkMode);
+
+    return () => {
+      observer.disconnect();
+      mediaQuery.removeEventListener('change', checkDarkMode);
+    };
+  }, []);
+
+  const getToastStyle = () => ({
+    background: isDarkMode ? '#ffffff' : '#000000',
+    color: isDarkMode ? '#000000' : '#ffffff',
+    border: isDarkMode ? '1px solid #e5e7eb' : '1px solid #374151',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,12 +84,8 @@ export default function Contact() {
     } catch (error) {
       console.error('EmailJS Error:', error);
       toast.error('Failed to send message. Please try again.', {
-        position: 'bottom-left',
-        style: {
-          background: 'hsl(var(--background))',
-          color: 'hsl(var(--foreground))',
-          border: '1px solid hsl(var(--border))',
-        },
+        position: 'bottom-right',
+        style: getToastStyle(),
       });
     }
   };
@@ -71,24 +101,20 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 bg-background">
-      <Toaster 
-        position="bottom-left"
+      <Toaster
+        position="bottom-right"
         toastOptions={{
-          style: {
-            background: 'hsl(var(--background))',
-            color: 'hsl(var(--foreground))',
-            border: '1px solid hsl(var(--border))',
-          },
+          style: getToastStyle(),
           success: {
             iconTheme: {
-              primary: 'hsl(var(--primary))',
-              secondary: 'hsl(var(--primary-foreground))',
+              primary: isDarkMode ? '#000000' : '#ffffff',
+              secondary: isDarkMode ? '#ffffff' : '#000000',
             },
           },
           error: {
             iconTheme: {
-              primary: 'hsl(var(--destructive))',
-              secondary: 'hsl(var(--destructive-foreground))',
+              primary: isDarkMode ? '#000000' : '#ffffff',
+              secondary: isDarkMode ? '#ffffff' : '#000000',
             },
           },
         }}
