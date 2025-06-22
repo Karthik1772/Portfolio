@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import emailjs from 'emailjs-com';
 import toast, { Toaster } from 'react-hot-toast';
+import { useTheme } from 'next-themes';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,33 +14,8 @@ export default function Contact() {
     message: '',
   });
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    // Check if dark mode is active
-    const checkDarkMode = () => {
-      const isDark = document.documentElement.classList.contains('dark') ||
-        window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setIsDarkMode(isDark);
-    };
-
-    checkDarkMode();
-
-    // Listen for theme changes
-    const observer = new MutationObserver(checkDarkMode);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', checkDarkMode);
-
-    return () => {
-      observer.disconnect();
-      mediaQuery.removeEventListener('change', checkDarkMode);
-    };
-  }, []);
+  const { resolvedTheme } = useTheme(); // ✅ directly get current theme
+  const isDarkMode = resolvedTheme === 'dark'; // ✅ true/false based on theme
 
   const getToastStyle = () => ({
     background: isDarkMode ? '#ffffff' : '#000000',
@@ -55,48 +31,29 @@ export default function Contact() {
       email: formData.email,
       title: formData.subject,
       message: formData.message,
-      time: new Date().toLocaleString(), // Optional field if added in template
+      time: new Date().toLocaleString(),
     };
 
     try {
       await emailjs.send(
-        'service_k611vwb', // ✅ Your service ID
-        'template_72dya9b', // ✅ Your template ID
+        'service_k611vwb',
+        'template_72dya9b',
         templateParams,
-        'hVSrYv_vQ1C4sHIEE' // ✅ Your public key
+        'hVSrYv_vQ1C4sHIEE'
       );
 
-      toast.success('Message sent successfully!', {
-        position: 'bottom-right',
-        style: {
-          background: 'hsl(var(--background))',
-          color: 'hsl(var(--foreground))',
-          border: '1px solid hsl(var(--border))',
-        },
-      });
-
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
+      toast.success('Message sent successfully!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('EmailJS Error:', error);
-      toast.error('Failed to send message. Please try again.', {
-        position: 'bottom-right',
-        style: getToastStyle(),
-      });
+      toast.error('Failed to send message. Please try again.');
     }
   };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
