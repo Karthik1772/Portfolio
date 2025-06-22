@@ -36,12 +36,12 @@ export default function Contact() {
 
     try {
       await emailjs.send(
-        'service_k611vwb',
-        'template_72dya9b',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         templateParams,
-        'hVSrYv_vQ1C4sHIEE'
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
-
+      
       toast.success('Message sent successfully!');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
