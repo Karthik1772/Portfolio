@@ -14,8 +14,8 @@ export default function Contact() {
     message: '',
   });
 
-  const { resolvedTheme } = useTheme(); // ✅ directly get current theme
-  const isDarkMode = resolvedTheme === 'dark'; // ✅ true/false based on theme
+  const { resolvedTheme } = useTheme(); 
+  const isDarkMode = resolvedTheme === 'dark'; 
 
   const getToastStyle = () => ({
     background: isDarkMode ? '#ffffff' : '#000000',
