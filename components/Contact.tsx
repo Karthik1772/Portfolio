@@ -33,7 +33,7 @@ export default function Contact() {
       );
 
       toast.success('Message sent successfully!', {
-        position: 'bottom-left',
+        position: 'bottom-right',
         style: {
           background: 'hsl(var(--background))',
           color: 'hsl(var(--foreground))',
