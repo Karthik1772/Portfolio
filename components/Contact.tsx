@@ -14,8 +14,8 @@ export default function Contact() {
     message: '',
   });
 
-  const { resolvedTheme } = useTheme();
-  const isDarkMode = resolvedTheme === 'dark';
+  const { resolvedTheme } = useTheme(); 
+  const isDarkMode = resolvedTheme === 'dark'; 
 
   const getToastStyle = () => ({
     background: isDarkMode ? '#ffffff' : '#000000',
@@ -36,10 +36,10 @@ export default function Contact() {
 
     try {
       await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        'service_k611vwb',
+        'template_72dya9b',
         templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        'hVSrYv_vQ1C4sHIEE'
       );
 
       toast.success('Message sent successfully!');
