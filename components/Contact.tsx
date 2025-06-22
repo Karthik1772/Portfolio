@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import emailjs from 'emailjs-com';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -16,21 +17,25 @@ export default function Contact() {
     e.preventDefault();
 
     const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      subject: formData.subject,
+      name: formData.name,
+      email: formData.email,
+      title: formData.subject,
       message: formData.message,
+      time: new Date().toLocaleString(), // Optional field if added in template
     };
 
     try {
       await emailjs.send(
-        'service_k611vwb', // Replace with your EmailJS Service ID
-        'template_72dya9b', // Replace with your EmailJS Template ID
+        'service_k611vwb', // ✅ Your service ID
+        'template_72dya9b', // ✅ Your template ID
         templateParams,
-        'hVSrYv_vQ1C4sHIEE'   // Replace with your EmailJS Public Key
+        'hVSrYv_vQ1C4sHIEE' // ✅ Your public key
       );
 
-      alert('Message sent successfully!');
+      toast.success('Message sent successfully!', {
+        position: 'bottom-left',
+      });
+
       setFormData({
         name: '',
         email: '',
@@ -39,7 +44,9 @@ export default function Contact() {
       });
     } catch (error) {
       console.error('EmailJS Error:', error);
-      alert('Failed to send message. Please try again later.');
+      toast.error('Failed to send message. Please try again.', {
+        position: 'bottom-left',
+      });
     }
   };
 
@@ -54,6 +61,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 bg-background">
+      <Toaster /> {/* 👈 Add toast container */}
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-left mb-12">
