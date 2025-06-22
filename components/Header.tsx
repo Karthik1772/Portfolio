@@ -76,7 +76,7 @@ export default function Header() {
         <div className="text-center mb-8">
           <div className="relative w-32 h-32 mx-auto mb-4 ">
             <Image
-              src="/img/profile-img1.jpg"
+              src="/img/profile-img.jpg"
               alt="Profile"
               fill
               className="rounded-full border-8 border-muted"
