@@ -33,14 +33,14 @@ const projects = [
     github: 'https://github.com/Karthik1772/Formify',
     liveLink: 'https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk'
   },
-  // {
-  //   image: '/img/icons/studentix.jpg',
-  //   title: 'Studentix',
-  //   description: 'A real-time student tracking app that instantly shows which student is logged in and actively using the system',
-  //   icon: User2,
-  //   github: 'https://github.com/Karthik1772/resource-managment',
-  //   liveLink: 'https://github.com/Karthik1772'
-  // },
+  {
+    image: '/img/icons/mystery.jpg',
+    title: 'Mystery Messager',
+    description: 'A real-time student tracking app that instantly shows which student is logged in and actively using the system',
+    icon: User2,
+    github: 'https://github.com/Karthik1772/Mystery_Messager',
+    liveLink: 'https://mystery-messager.vercel.app/'
+  },
   // {
   //   title: 'Major project',
   //   description: 'Cloud-based applications and infrastructure solutions.',
