@@ -90,7 +90,7 @@ export default function Header() {
           <SocialLink href="https://github.com/Karthik1772" icon={<Github />} label="GitHub" />
           <SocialLink href="https://x.com/karthik__177" icon={<Twitter />} label="Twitter" />
           <SocialLink href="https://www.instagram.com/nomadic_brahmana_/" icon={<Instagram />} label="Instagram" />
-          <SocialLink href="https://www.linkedin.com/in/karthik-s-kashyap-648908251/" icon={<Linkedin />} label="LinkedIn" />
+          <SocialLink href="https://www.linkedin.com/in/karthik-s-kashyap/" icon={<Linkedin />} label="LinkedIn" />
         </div>
 
         <nav>
