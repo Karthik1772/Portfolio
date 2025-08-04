@@ -36,7 +36,7 @@ const projects = [
   {
     image: '/img/icons/mystery.jpg',
     title: 'Mystery Messager',
-    description: 'A real-time student tracking app that instantly shows which student is logged in and actively using the system',
+    description: 'Mystery Messager is a Next.js app for sending anonymous messages with AI suggestions, secure login, and OTP verification.',
     icon: User2,
     github: 'https://github.com/Karthik1772/Mystery_Messager',
     liveLink: 'https://mystery-messager.vercel.app/'
