@@ -7,7 +7,8 @@ const projects = [
     description: 'A clean, minimal to-do app designed to simplify daily task management.',
     icon: Database,
     github: 'https://github.com/Karthik1772/Doozy',
-    liveLink: 'https://github.com/Karthik1772/Doozy/releases/download/v1.0.0/Doozy.apk'
+    liveLink: 'https://github.com/Karthik1772/Doozy/releases/download/v1.0.0/Doozy.apk',
+    textb:'Download',
   },
   {
     image: '/img/icons/xoxo.jpg',
@@ -15,7 +16,8 @@ const projects = [
     description: 'A custom-built Tic Tac Toe game with a clean Flutter architecture.',
     icon: Layout,
     github: 'https://github.com/Karthik1772/XoXo',
-    liveLink: 'https://github.com/Karthik1772/XoXo/releases/download/v1.0.0/XoXo.apk'
+    liveLink: 'https://github.com/Karthik1772/XoXo/releases/download/v1.0.0/XoXo.apk',
+    textb: 'Download',
   },
   {
     image: '/img/icons/xpenso.jpg',
@@ -23,7 +25,8 @@ const projects = [
     description: 'A lightweight and intuitive expense tracker for managing your daily spending',
     icon: Wallet,
     github: 'https://github.com/Karthik1772/Xpenso',
-    liveLink: 'https://github.com/Karthik1772/Xpenso/releases/download/v1.0.0/Xpenso.apk'
+    liveLink: 'https://github.com/Karthik1772/Xpenso/releases/download/v1.0.0/Xpenso.apk',
+    textb: 'Download',
   },
   {
     image: '/img/icons/formify.jpg',
@@ -31,15 +34,17 @@ const projects = [
     description: 'A modular Flutter app for building dynamic forms with reusable components and clean architecture.',
     icon: Terminal,
     github: 'https://github.com/Karthik1772/Formify',
-    liveLink: 'https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk'
+    liveLink: 'https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk',
+    textb: 'Download',
   },
   {
     image: '/img/icons/mystery.jpg',
     title: 'Mystery Messager',
-    description: 'Mystery Messager is a Next.js app for sending anonymous messages with AI suggestions, secure login, and OTP verification.',
+    description: 'A Next.js app for sending anonymous messages with AI suggestions, secure login, and OTP verification.',
     icon: User2,
     github: 'https://github.com/Karthik1772/Mystery_Messager',
-    liveLink: 'https://mystery-messager.vercel.app/'
+    liveLink: 'https://mystery-messager.vercel.app/',
+    textb: 'View Live',
   },
   // {
   //   title: 'Major project',
@@ -73,13 +78,14 @@ export default function Projects() {
   );
 }
 
-function ProjectCard({ title, description, icon: Icon, github, liveLink, image }: {
+function ProjectCard({ title, description, icon: Icon, github, liveLink, image, textb }: {
   title: string;
   description: string;
   icon: any;
   github?: string;
   liveLink?: string;
   image?: string;
+  textb?: string;
 }) {
   return (
     <div className="bg-background p-6 rounded-lg shadow-lg border border-border hover:border-primary transition-colors">
@@ -98,7 +104,7 @@ function ProjectCard({ title, description, icon: Icon, github, liveLink, image }
           View Code
         </a>}
         {liveLink && <a target='_blank' href={liveLink} className="text-primary hover:underline bg-muted p-2 rounded-lg hover:bg-muted/50">
-          Download
+          {textb}
         </a>}
       </div>
     </div>
