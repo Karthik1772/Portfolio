@@ -38,7 +38,7 @@ const info = [
   },
   { icon: Calendar, label: "Age", value: `${calculateAge(birthday)}` },
   { icon: Mail, label: "Email", value: "karthikamma2004@gmail.com" },
-  { icon: MapPin, label: "City", value: "Bangalore, Karnataka, India" },
+  { icon: MapPin, label: "City", value: "Mysore, Karnataka, India" },
   { icon: Globe, label: "Website", value: "karthik-s-kashyap.vercel.app" },
 ];
 
