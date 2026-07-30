@@ -8,6 +8,12 @@ const introScript = [
   { text: '$ whoami', cls: 'text-[#7FE0AA]' },
   { text: 'karthik — frontend developer, bengaluru' },
   { text: '' },
+  { text: '$ git log --oneline -4', cls: 'text-[#7FE0AA]' },
+  { text: 'a1b2c3d ship(mystery-messenger): gemini reply suggestions' },
+  { text: 'f4e5d6c fix(barracuda): backup-source race condition' },
+  { text: '9c8b7a6 feat(bug-blaster): priority sort + filters' },
+  { text: '3d2e1f0 release(doozy): tag v1.0.0' },
+  { text: '' },
 ];
 
 type Command = { path: string; label: string };
