@@ -2,24 +2,30 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
-  { href: '#about', label: 'about' },
-  { href: '#resume', label: 'build-log' },
-  { href: '#skills', label: 'stack' },
-  { href: '#projects', label: 'releases' },
-  { href: '#achievements', label: 'achievements' },
-  { href: '#contact', label: 'contact' },
+  { href: '/about', label: 'about' },
+  { href: '/resume', label: 'build-log' },
+  { href: '/skills', label: 'stack' },
+  { href: '/projects', label: 'releases' },
+  { href: '/achievements', label: 'achievements' },
+  { href: '/contact', label: 'contact' },
 ];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/85 border-b border-border">
@@ -33,11 +39,20 @@ export default function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7 font-mono-brand text-[13px] text-muted-foreground">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-foreground transition-colors">
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`transition-colors ${active ? 'font-medium' : 'hover:text-foreground'}`}
+                style={active ? { color: 'var(--clr-green)' } : undefined}
+                aria-current={active ? 'page' : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -56,16 +71,22 @@ export default function Header() {
 
       {isMenuOpen && (
         <nav className="lg:hidden border-t border-border bg-background px-4 py-4 flex flex-col gap-1 font-mono-brand text-sm">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="py-2.5 px-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`py-2.5 px-2 rounded-md transition-colors ${
+                  active ? 'bg-muted' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                }`}
+                style={active ? { color: 'var(--clr-green)' } : undefined}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           <div className="pt-2">
             <ThemeToggle />
           </div>

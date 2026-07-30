@@ -60,7 +60,7 @@ const projects = [
 export default function Projects() {
   return (
     <section id="projects" className="py-20 sm:py-24 bg-card border-y border-border">
-      <div className="container mx-auto px-4 sm:px-6 reveal">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="eyebrow">releases</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
           Things I&apos;ve shipped end to end
