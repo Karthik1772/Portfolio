@@ -26,7 +26,7 @@ const collabAndCerts = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 sm:py-24">
+    <section id="skills" className="py-10 sm:py-14">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="eyebrow">tech-stack</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">

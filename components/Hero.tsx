@@ -5,7 +5,7 @@ import Terminal, { commandList } from './Terminal';
 
 export default function Hero() {
   return (
-    <section id="hero" className="pt-20 pb-16">
+    <section id="hero" className="py-10 sm:py-14">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-14 items-center">
           <div>

@@ -61,7 +61,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 sm:py-24 bg-card border-y border-border"
+      className="py-10 sm:py-14 bg-card border-y border-border"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="eyebrow">projects</div>

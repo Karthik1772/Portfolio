@@ -15,8 +15,10 @@ type Command = { path: string; label: string };
 const commands: Record<string, Command> = {
   about: { path: "/about", label: "about.md" },
   experience: { path: "/resume", label: "work-experience" },
+  "work-experience": { path: "/resume", label: "work-experience" },
   education: { path: "/education", label: "education" },
   stack: { path: "/skills", label: "tech-stack" },
+  "tech-stack": { path: "/skills", label: "tech-stack" },
   projects: { path: "/projects", label: "projects" },
   achievements: { path: "/achievements", label: "achievements" },
   contact: { path: "/contact", label: "contact" },
@@ -25,13 +27,16 @@ const commands: Record<string, Command> = {
 
 export const commandList = [
   "/about",
-  "/experience",
+  "/work-experience",
   "/education",
   "/tech-stack",
   "/projects",
   "/achievements",
   "/contact",
 ];
+
+const CMD_HISTORY_KEY = "terminal-cmd-history";
+const MAX_HISTORY = 50;
 
 type HistoryLine = { type: "cmd" | "out" | "err"; text: string };
 
@@ -55,6 +60,59 @@ export default function Terminal({
   const [introDone, setIntroDone] = useState(!showIntro);
   const [history, setHistory] = useState<HistoryLine[]>([]);
   const [value, setValue] = useState("");
+  const [cmdHistory, setCmdHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const draftRef = useRef("");
+
+  // Load previously typed commands so the up/down arrows have history
+  // to page through, even after navigating between pages or reloading.
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(CMD_HISTORY_KEY);
+      if (saved) setCmdHistory(JSON.parse(saved));
+    } catch {
+      // ignore malformed/unavailable storage
+    }
+  }, []);
+
+  const pushToCmdHistory = (cmd: string) => {
+    setCmdHistory((h) => {
+      if (h[h.length - 1] === cmd) return h;
+      const next = [...h, cmd].slice(-MAX_HISTORY);
+      try {
+        window.localStorage.setItem(CMD_HISTORY_KEY, JSON.stringify(next));
+      } catch {
+        // ignore malformed/unavailable storage
+      }
+      return next;
+    });
+    setHistoryIndex(-1);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (cmdHistory.length === 0) return;
+      setHistoryIndex((idx) => {
+        if (idx === -1) draftRef.current = value;
+        const nextIdx = idx === -1 ? cmdHistory.length - 1 : Math.max(0, idx - 1);
+        setValue(cmdHistory[nextIdx]);
+        return nextIdx;
+      });
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (historyIndex === -1) return;
+      setHistoryIndex((idx) => {
+        const nextIdx = idx + 1;
+        if (nextIdx >= cmdHistory.length) {
+          setValue(draftRef.current);
+          return -1;
+        }
+        setValue(cmdHistory[nextIdx]);
+        return nextIdx;
+      });
+    }
+  };
 
   useEffect(() => {
     if (!showIntro) return;
@@ -108,6 +166,7 @@ export default function Terminal({
     const trimmed = raw.trim();
     if (!trimmed) return;
     const clean = trimmed.toLowerCase().replace(/^\//, "");
+    pushToCmdHistory(trimmed);
 
     if (clean === "clear") {
       setHistory([]);
@@ -208,7 +267,11 @@ export default function Terminal({
               <input
                 ref={inputRef}
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                  setHistoryIndex(-1);
+                }}
+                onKeyDown={handleKeyDown}
                 spellCheck={false}
                 autoComplete="off"
                 className="flex-1 bg-transparent outline-none font-mono-brand text-[13.5px]"

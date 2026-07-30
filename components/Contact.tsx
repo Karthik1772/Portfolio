@@ -56,7 +56,7 @@ export default function Contact() {
     'w-full p-3 rounded-md border border-border bg-background font-mono-brand text-sm placeholder:text-muted-foreground focus:outline-none focus:border-[var(--clr-green)]';
 
   return (
-    <section id="contact" className="py-20 sm:py-24 bg-card border-t border-border">
+    <section id="contact" className="py-10 sm:py-14 bg-card border-t border-border">
       <Toaster
         position="bottom-right"
         toastOptions={{

@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} font-sans`}
+        className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} font-sans min-h-screen flex flex-col`}
         style={{ fontFamily: 'var(--font-body), sans-serif' }}
       >
         <Providers>

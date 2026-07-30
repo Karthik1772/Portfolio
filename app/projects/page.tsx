@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-[calc(100vh-4rem)] flex flex-col justify-center">
+    <main className="flex-1 flex flex-col justify-center">
       <Projects />
     </main>
   );

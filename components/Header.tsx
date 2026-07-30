@@ -29,7 +29,7 @@ export default function Header() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-background/85 border-b border-border">
+    <header className="sticky top-0 z-50 shrink-0 backdrop-blur-md bg-background/85 border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         <Link href="/" className="font-mono-brand text-sm font-medium flex items-center gap-2">
           <span

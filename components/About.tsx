@@ -10,7 +10,7 @@ const meta = [
 
 export default function About() {
   return (
-    <section id="about" className="py-20 sm:py-24">
+    <section id="about" className="py-10 sm:py-14">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[1.3fr,0.7fr] gap-12">
           <div>

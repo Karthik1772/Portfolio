@@ -2,7 +2,7 @@ import Hero from '@/components/Hero';
 
 export default function Home() {
   return (
-      <main className="min-h-screen">
+      <main className="flex-1 flex flex-col justify-center">
         <Hero />
       </main>
   );
