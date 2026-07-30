@@ -25,7 +25,7 @@ const experience = [
   },
 ];
 
-export default function Resume() {
+export default function WorkExperience() {
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = "/Resume/KARTHIK-S-KASHYAP.pdf";
@@ -37,7 +37,7 @@ export default function Resume() {
 
   return (
     <section
-      id="resume"
+      id="WorkExperience"
       className="py-10 sm:py-14 bg-card border-y border-border"
     >
       <div className="container mx-auto px-4 sm:px-6">

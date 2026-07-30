@@ -3,19 +3,19 @@
 const skillGroups = [
   {
     category: 'languages',
-    skills: ['JavaScript (ES6+)', 'TypeScript', 'HTML5', 'CSS3 / SCSS', 'Java', 'Dart', 'SQL'],
+    Tech_stack: ['JavaScript (ES6+)', 'TypeScript', 'HTML5', 'CSS3 / SCSS', 'Java', 'Dart', 'SQL'],
   },
   {
     category: 'frameworks & libraries',
-    skills: ['React.js', 'Next.js', 'Material UI', 'Tailwind CSS', 'Flutter'],
+    Tech_stack: ['React.js', 'Next.js', 'Material UI', 'Tailwind CSS', 'Flutter'],
   },
   {
     category: 'testing',
-    skills: ['Jest', 'React Testing Library'],
+    Tech_stack: ['Jest', 'React Testing Library'],
   },
   {
     category: 'devops & tools',
-    skills: ['Git / GitHub', 'Azure DevOps CI/CD', 'ArgoCD', 'Kubernetes', 'Vercel'],
+    Tech_stack: ['Git / GitHub', 'Azure DevOps CI/CD', 'ArgoCD', 'Kubernetes', 'Vercel'],
   },
 ];
 
@@ -24,11 +24,11 @@ const collabAndCerts = [
   'IBM · Front-End Apps with React', 'Wipro TalentNext · Java Full Stack',
 ];
 
-export default function Skills() {
+export default function TechStack() {
   return (
-    <section id="skills" className="py-10 sm:py-14">
+    <section id="TechStack" className="py-10 sm:py-14">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="eyebrow">tech-stack</div>
+        <div className="eyebrow">Tech_Stack</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
           Tools I reach for
         </h2>
@@ -44,7 +44,7 @@ export default function Skills() {
                 {group.category}
               </div>
               <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
+                {group.Tech_stack.map((skill) => (
                   <span
                     key={skill}
                     className="font-mono-brand text-[12.5px] border border-border px-2.5 py-1.5 rounded"

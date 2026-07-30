@@ -22,7 +22,7 @@ export default function Education() {
   return (
     <section id="education" className="py-10 sm:py-14">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="eyebrow">education</div>
+        <div className="eyebrow">Education</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
           Where I&apos;ve studied
         </h2>
