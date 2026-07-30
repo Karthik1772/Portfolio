@@ -69,7 +69,8 @@ export default function Projects() {
           Things I&apos;ve shipped end to end
         </h2>
         <p className="text-muted-foreground max-w-md mb-12">
-          Not demos — tagged, released, and downloadable.
+          A collection of projects that showcase my approach to building
+          scalable, user-focused applications.
         </p>
 
         <div className="grid md:grid-cols-2 gap-5">

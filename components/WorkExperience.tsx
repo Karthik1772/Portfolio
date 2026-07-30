@@ -4,7 +4,7 @@ import { Download } from "lucide-react";
 
 const experience = [
   {
-    tag: "2025.10 → 2026.07",
+    tag: "2025.09 → 2026.07",
     company: "Barracuda Networks",
     role: "Frontend Developer Intern · Data Protection Team · Bangalore",
     changes: [
@@ -45,10 +45,11 @@ export default function WorkExperience() {
           <div>
             <div className="eyebrow">Work Experience</div>
             <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
-              Where I&apos;ve shipped
+              Professional Journey
             </h2>
             <p className="text-muted-foreground max-w-md">
-              Experience, logged like commits — what changed and what it touched.
+              Building products, solving problems, and delivering software that
+              makes an impact.
             </p>
           </div>
           <button

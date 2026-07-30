@@ -30,10 +30,11 @@ export default function TechStack() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="eyebrow">Tech Stack</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
-          Tools I reach for
+          Technologies I work with
         </h2>
         <p className="text-muted-foreground max-w-md mb-12">
-          Grouped by what they&apos;re for, not how impressive they sound.
+          The languages, frameworks, and tools I use to build modern, scalable
+          applications.
         </p>
 
         <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">

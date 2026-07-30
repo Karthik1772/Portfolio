@@ -36,7 +36,7 @@ export default function Header() {
             className="w-2 h-2 rounded-full"
             style={{ background: 'var(--clr-green)', boxShadow: '0 0 0 3px var(--clr-green-soft)' }}
           />
-          karthik@dev ~
+          Karthik@dev ~
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7 font-mono-brand text-[13px] text-muted-foreground">
