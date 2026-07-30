@@ -1,11 +1,25 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Providers } from '@/components/Providers';
 
-const inter = Inter({ subsets: ['latin'] });
+const displayFont = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-display',
+});
+const bodyFont = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-body',
+});
+const monoFont = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-mono-brand',
+});
 
 export const metadata: Metadata = {
   title: 'Karthik S Kashyap - Portfolio',
@@ -25,7 +39,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body
+        className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} font-sans`}
+        style={{ fontFamily: 'var(--font-body), sans-serif' }}
+      >
         <Providers>
           <Header />
           {children}

@@ -1,158 +1,115 @@
-import {
-  Wallet,
-  Layout,
-  Database,
-  Terminal,
-  Cloud,
-  User2,
-  Bug,
-} from "lucide-react";
+'use client';
 
 const projects = [
   {
-    image: "/img/icons/mystery.jpg",
-    title: "Mystery Messenger",
+    title: 'Mystery Messenger',
+    tag: 'live',
     description:
-      "A full-stack Next.js app for anonymous messaging with OTP-based email verification, NextAuth.js session auth, Gemini AI-powered message suggestions, and a responsive mobile-first UI.",
-    icon: User2,
-    github: "https://github.com/Karthik1772/Mystery_Messager",
-    liveLink: "https://mystery-messager.vercel.app/",
-    textb: "View Live",
+      'Anonymous messaging app with OTP email verification, session auth via NextAuth.js, and Gemini-powered reply suggestions.',
+    tech: 'Next.js · TypeScript · MongoDB · NextAuth.js',
+    github: 'https://github.com/Karthik1772/Mystery_Messager',
+    live: 'https://mystery-messager.vercel.app/',
+    liveLabel: 'live',
   },
   {
-    image: undefined,
-    title: "Bug Blaster",
+    title: 'Bug Blaster',
+    tag: 'v1.0.0',
     description:
-      "A React-based issue tracker with full CRUD operations, priority-based sorting, and a filterable dashboard. Integrated RESTful APIs using Axios with error boundary handling and loading states.",
-    icon: Bug,
-    github: "https://github.com/Karthik1772/Bug-Blaster",
-    liveLink: undefined,
-    textb: undefined,
+      'Issue tracker with full CRUD, priority-based sorting, and a filterable dashboard for triaging bugs.',
+    tech: 'React.js · Axios · MongoDB · REST API',
+    github: 'https://github.com/Karthik1772/Bug-Blaster',
   },
   {
-    image: "/img/icons/doozy.jpg",
-    title: "Doozy",
-    description:
-      "A clean, minimal to-do app designed to simplify daily task management.",
-    icon: Database,
-    github: "https://github.com/Karthik1772/Doozy",
-    liveLink:
-      "https://github.com/Karthik1772/Doozy/releases/download/v1.0.0/Doozy.apk",
-    textb: "Download",
+    title: 'Doozy',
+    tag: 'v1.0.0',
+    description: 'A clean, minimal to-do app built to make daily task management genuinely simple.',
+    tech: 'Flutter · Dart',
+    github: 'https://github.com/Karthik1772/Doozy',
+    live: 'https://github.com/Karthik1772/Doozy/releases/download/v1.0.0/Doozy.apk',
+    liveLabel: 'apk',
   },
   {
-    image: "/img/icons/xoxo.jpg",
-    title: "XoXo",
-    description:
-      "A custom-built Tic Tac Toe game with a clean Flutter architecture.",
-    icon: Layout,
-    github: "https://github.com/Karthik1772/XoXo",
-    liveLink:
-      "https://github.com/Karthik1772/XoXo/releases/download/v1.0.0/XoXo.apk",
-    textb: "Download",
+    title: 'Xpenso',
+    tag: 'v1.0.0',
+    description: 'Lightweight expense tracker for logging and reviewing daily spending at a glance.',
+    tech: 'Flutter · Dart',
+    github: 'https://github.com/Karthik1772/Xpenso',
+    live: 'https://github.com/Karthik1772/Xpenso/releases/download/v1.0.0/Xpenso.apk',
+    liveLabel: 'apk',
   },
   {
-    image: "/img/icons/xpenso.jpg",
-    title: "Xpenso",
-    description:
-      "A lightweight and intuitive expense tracker for managing your daily spending.",
-    icon: Wallet,
-    github: "https://github.com/Karthik1772/Xpenso",
-    liveLink:
-      "https://github.com/Karthik1772/Xpenso/releases/download/v1.0.0/Xpenso.apk",
-    textb: "Download",
+    title: 'Formify',
+    tag: 'v1.0.0',
+    description: 'Modular app for building dynamic forms from reusable components with a clean architecture underneath.',
+    tech: 'Flutter · Dart',
+    github: 'https://github.com/Karthik1772/Formify',
+    live: 'https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk',
+    liveLabel: 'apk',
   },
   {
-    image: "/img/icons/formify.jpg",
-    title: "Formify",
-    description:
-      "A modular Flutter app for building dynamic forms with reusable components and clean architecture.",
-    icon: Terminal,
-    github: "https://github.com/Karthik1772/Formify",
-    liveLink:
-      "https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk",
-    textb: "Download",
+    title: 'XoXo',
+    tag: 'v1.0.0',
+    description: 'Tic-tac-toe, built as an exercise in clean Flutter architecture rather than the game itself.',
+    tech: 'Flutter · Dart',
+    github: 'https://github.com/Karthik1772/XoXo',
+    live: 'https://github.com/Karthik1772/XoXo/releases/download/v1.0.0/XoXo.apk',
+    liveLabel: 'apk',
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-left mb-12">
-            <h2 className="text-3xl font-bold mb-4">Projects</h2>
-            <p className="text-muted-foreground">
-              Showcase of my technical projects and applications built with
-              various technologies.
-            </p>
-          </div>
+    <section id="projects" className="py-20 sm:py-24 bg-card border-y border-border">
+      <div className="container mx-auto px-4 sm:px-6 reveal">
+        <div className="eyebrow">releases</div>
+        <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
+          Things I&apos;ve shipped end to end
+        </h2>
+        <p className="text-muted-foreground max-w-md mb-12">
+          Not demos — tagged, released, and downloadable.
+        </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <ProjectCard key={index} {...project} />
-            ))}
-          </div>
+        <div className="grid md:grid-cols-2 gap-5">
+          {projects.map((p) => (
+            <div
+              key={p.title}
+              className="border border-border rounded-md p-6 bg-background hover:-translate-y-1 hover:border-[var(--clr-green)] transition-all"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-display font-semibold text-lg">{p.title}</h3>
+                <span
+                  className="font-mono-brand text-[11.5px] px-2 py-1 rounded"
+                  style={{ color: 'var(--clr-copper)', background: 'var(--clr-copper-soft)' }}
+                >
+                  {p.tag}
+                </span>
+              </div>
+              <p className="text-muted-foreground text-sm mb-4">{p.description}</p>
+              <div className="font-mono-brand text-[11.5px] text-muted-foreground mb-4">{p.tech}</div>
+              <div className="flex gap-2.5">
+                <a
+                  href={p.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors"
+                >
+                  code ↗
+                </a>
+                {p.live && (
+                  <a
+                    href={p.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors"
+                  >
+                    {p.liveLabel} {p.liveLabel === 'apk' ? '↓' : '↗'}
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function ProjectCard({
-  title,
-  description,
-  icon: Icon,
-  github,
-  liveLink,
-  image,
-  textb,
-}: {
-  title: string;
-  description: string;
-  icon: any;
-  github?: string;
-  liveLink?: string;
-  image?: string;
-  textb?: string;
-}) {
-  return (
-    <div className="bg-background p-6 rounded-lg shadow-lg border border-border hover:border-primary transition-colors">
-      <div className="w-12 h-12 text-primary flex items-center justify-center mb-4">
-        {image ? (
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full rounded-xl object-cover"
-          />
-        ) : (
-          <div className="w-full h-full bg-primary/10 rounded-lg flex items-center justify-center">
-            <Icon className="w-6 h-6" />
-          </div>
-        )}
-      </div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
-      <div className="mt-4 flex items-center space-x-4">
-        {github && (
-          <a
-            target="_blank"
-            href={github}
-            className="text-primary hover:underline p-2 bg-muted rounded-lg hover:bg-muted/50"
-          >
-            View Code
-          </a>
-        )}
-        {liveLink && textb && (
-          <a
-            target="_blank"
-            href={liveLink}
-            className="text-primary hover:underline bg-muted p-2 rounded-lg hover:bg-muted/50"
-          >
-            {textb}
-          </a>
-        )}
-      </div>
-    </div>
   );
 }

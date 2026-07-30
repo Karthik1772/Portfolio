@@ -1,3 +1,5 @@
+import StatusStrip from '@/components/StatusStrip';
+import RevealObserver from '@/components/RevealObserver';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
@@ -8,14 +10,18 @@ import Achievements from '@/components/Achievements';
 
 export default function Home() {
   return (
-    <main className="min-h-screen lg:ml-[300px] lg:max-w-[calc(100vw-300px)] ">
-      <Hero />
-      <About />
-      <Skills />
-      <Resume />
-      <Projects />
-      <Achievements />
-      <Contact />
-    </main>
+    <>
+      <RevealObserver />
+      <StatusStrip />
+      <main className="min-h-screen">
+        <Hero />
+        <About />
+        <Resume />
+        <Skills />
+        <Projects />
+        <Achievements />
+        <Contact />
+      </main>
+    </>
   );
 }

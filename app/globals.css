@@ -2,73 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+/*
+  Design tokens — "build log" theme.
+  Paper-grey base with a PCB-green / copper-trace accent pair,
+  nodding to Karthik's electronics engineering background without
+  going literal-circuit-board. Kept as HSL so existing shadcn/ui
+  components (button, carousel, etc.) keep working unmodified.
+*/
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
+    --background: 84 8% 94%;        /* #F1F2ED paper */
+    --foreground: 160 6% 9%;        /* #14181A ink */
+    --card: 84 10% 91%;             /* #E8EAE2 paper-2 */
+    --card-foreground: 160 6% 9%;
+    --popover: 84 8% 94%;
+    --popover-foreground: 160 6% 9%;
+    --primary: 160 6% 9%;           /* ink, used for solid buttons */
+    --primary-foreground: 84 8% 94%;
+    --secondary: 84 10% 91%;
+    --secondary-foreground: 160 6% 9%;
+    --muted: 84 10% 91%;
+    --muted-foreground: 100 4% 36%; /* #565D57 ink-soft */
+    --accent: 148 40% 32%;          /* #2F6F4E pcb green */
+    --accent-foreground: 84 8% 94%;
+    --destructive: 0 65% 48%;
+    --destructive-foreground: 84 8% 94%;
+    --border: 84 10% 82%;           /* #D2D5CB */
+    --input: 84 10% 82%;
+    --ring: 148 40% 32%;
+    --chart-1: 148 40% 32%;
+    --chart-2: 20 58% 45%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 0.25rem;
+
+    /* accent pair, referenced directly where hsl(var(--x)) isn't a fit */
+    --clr-green: #2f6f4e;
+    --clr-green-soft: #dceae1;
+    --clr-copper: #b85c2e;
+    --clr-copper-soft: #f1dfcf;
+    --clr-line: #d2d5cb;
+    --clr-dot: #d2d5cb;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
+    --background: 100 12% 6%;        /* #10130F */
+    --foreground: 84 12% 92%;        /* #EDEFE8 */
+    --card: 96 12% 9%;               /* #181C15 */
+    --card-foreground: 84 12% 92%;
+    --popover: 100 12% 6%;
+    --popover-foreground: 84 12% 92%;
+    --primary: 84 12% 92%;
+    --primary-foreground: 100 12% 6%;
+    --secondary: 96 12% 9%;
+    --secondary-foreground: 84 12% 92%;
+    --muted: 96 12% 9%;
+    --muted-foreground: 90 8% 62%;   /* #9AA294 */
+    --accent: 148 42% 56%;           /* #5FBF8C */
+    --accent-foreground: 100 12% 6%;
+    --destructive: 0 55% 45%;
+    --destructive-foreground: 84 12% 92%;
+    --border: 100 10% 15%;           /* #2B3126 */
+    --input: 100 10% 15%;
+    --ring: 148 42% 56%;
+    --chart-1: 148 42% 56%;
+    --chart-2: 26 74% 61%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    --clr-green: #5fbf8c;
+    --clr-green-soft: #1c2b22;
+    --clr-copper: #e08a4e;
+    --clr-copper-soft: #2e2216;
+    --clr-line: #2b3126;
+    --clr-dot: #242920;
   }
 }
 
@@ -78,9 +87,74 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: radial-gradient(var(--clr-dot) 1px, transparent 1px);
+    background-size: 26px 26px;
+    background-position: -13px -13px;
   }
 }
 
 * {
   scroll-behavior: smooth;
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+.font-mono-brand {
+  font-family: var(--font-mono-brand), monospace;
+}
+
+.eyebrow {
+  font-family: var(--font-mono-brand), monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.03em;
+  color: var(--clr-green);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.eyebrow::before {
+  content: "›";
+  color: var(--clr-copper);
+  font-weight: 600;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.term-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: var(--clr-green);
+  vertical-align: middle;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .status-track { animation: none !important; }
+}
+@keyframes cmd-flash {
+  0% { background-color: var(--clr-green-soft); }
+  100% { background-color: transparent; }
+}
+.cmd-highlight {
+  animation: cmd-flash 1.2s ease-out;
 }
