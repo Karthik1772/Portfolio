@@ -43,7 +43,7 @@ export default function Resume() {
 
   return (
     <section id="resume" className="py-20 sm:py-24 bg-card border-y border-border">
-      <div className="container mx-auto px-4 sm:px-6 reveal">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-4">
           <div>
             <div className="eyebrow">build-log</div>

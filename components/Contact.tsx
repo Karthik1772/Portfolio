@@ -65,7 +65,7 @@ export default function Contact() {
           error: { iconTheme: { primary: isDarkMode ? '#000' : '#fff', secondary: isDarkMode ? '#fff' : '#000' } },
         }}
       />
-      <div className="container mx-auto px-4 sm:px-6 reveal">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="eyebrow">contact</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">Let&apos;s talk</h2>
         <p className="text-muted-foreground max-w-md mb-10">

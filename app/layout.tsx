@@ -3,6 +3,7 @@ import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import TerminalDock from '@/components/TerminalDock';
 import { Providers } from '@/components/Providers';
 
 const displayFont = Space_Grotesk({
@@ -47,6 +48,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <TerminalDock />
         </Providers>
       </body>
     </html>
