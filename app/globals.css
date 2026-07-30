@@ -124,19 +124,10 @@
   50% { opacity: 0; }
 }
 .term-cursor {
-  display: inline-block;
-  width: 7px;
-  height: 14px;
-  background: var(--clr-green);
-  vertical-align: middle;
-  animation: blink 1s steps(1) infinite;
-}
-
-@keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .status-track { animation: none !important; }
+   display: inline-block;
+   width: 7px;
+   height: 14px;
+   background: var(--clr-green);
+   vertical-align: middle;
+   animation: blink 1s steps(1) infinite;
 }

@@ -59,9 +59,12 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 sm:py-24 bg-card border-y border-border">
+    <section
+      id="projects"
+      className="py-20 sm:py-24 bg-card border-y border-border"
+    >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="eyebrow">releases</div>
+        <div className="eyebrow">projects</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
           Things I&apos;ve shipped end to end
         </h2>
@@ -76,16 +79,25 @@ export default function Projects() {
               className="border border-border rounded-md p-6 bg-background hover:-translate-y-1 hover:border-[var(--clr-green)] transition-all"
             >
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-display font-semibold text-lg">{p.title}</h3>
+                <h3 className="font-display font-semibold text-lg">
+                  {p.title}
+                </h3>
                 <span
                   className="font-mono-brand text-[11.5px] px-2 py-1 rounded"
-                  style={{ color: 'var(--clr-copper)', background: 'var(--clr-copper-soft)' }}
+                  style={{
+                    color: "var(--clr-copper)",
+                    background: "var(--clr-copper-soft)",
+                  }}
                 >
                   {p.tag}
                 </span>
               </div>
-              <p className="text-muted-foreground text-sm mb-4">{p.description}</p>
-              <div className="font-mono-brand text-[11.5px] text-muted-foreground mb-4">{p.tech}</div>
+              <p className="text-muted-foreground text-sm mb-4">
+                {p.description}
+              </p>
+              <div className="font-mono-brand text-[11.5px] text-muted-foreground mb-4">
+                {p.tech}
+              </div>
               <div className="flex gap-2.5">
                 <a
                   href={p.github}
@@ -102,7 +114,7 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors"
                   >
-                    {p.liveLabel} {p.liveLabel === 'apk' ? '↓' : '↗'}
+                    {p.liveLabel} {p.liveLabel === "apk" ? "↓" : "↗"}
                   </a>
                 )}
               </div>

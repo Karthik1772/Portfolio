@@ -28,7 +28,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-20 sm:py-24">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="eyebrow">stack.json</div>
+        <div className="eyebrow">tech-stack</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
           Tools I reach for
         </h2>
@@ -40,7 +40,7 @@ export default function Skills() {
           {skillGroups.map((group) => (
             <div key={group.category}>
               <div className="font-mono-brand text-[12.5px] text-muted-foreground mb-3">
-                <span style={{ color: 'var(--clr-copper)' }}>{'// '}</span>
+                <span style={{ color: "var(--clr-copper)" }}>{"// "}</span>
                 {group.category}
               </div>
               <div className="flex flex-wrap gap-2">
@@ -58,7 +58,7 @@ export default function Skills() {
 
           <div className="md:col-span-2">
             <div className="font-mono-brand text-[12.5px] text-muted-foreground mb-3">
-              <span style={{ color: 'var(--clr-copper)' }}>{'// '}</span>
+              <span style={{ color: "var(--clr-copper)" }}>{"// "}</span>
               collaboration & certs
             </div>
             <div className="flex flex-wrap gap-2">
