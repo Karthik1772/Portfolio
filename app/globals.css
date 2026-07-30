@@ -45,6 +45,14 @@
     --clr-copper-soft: #f1dfcf;
     --clr-line: #d2d5cb;
     --clr-dot: #d2d5cb;
+
+    /* terminal window — intentionally fixed-dark in both themes, so these
+       are declared once here rather than overridden under .dark */
+    --term-bg: #14181a;
+    --term-dot: #3a413c;
+    --term-text: #d9f0e1;
+    --term-green: #7fe0aa;
+    --term-error: #e08a6a;
   }
   .dark {
     --background: 100 12% 6%;        /* #10130F */

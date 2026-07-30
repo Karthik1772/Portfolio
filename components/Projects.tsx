@@ -64,7 +64,7 @@ export default function Projects() {
       className="py-10 sm:py-14 bg-card border-y border-border"
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="eyebrow">projects</div>
+        <div className="eyebrow">Projects</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
           Things I&apos;ve shipped end to end
         </h2>

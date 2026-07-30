@@ -3,19 +3,19 @@
 const skillGroups = [
   {
     category: 'languages',
-    Tech_stack: ['JavaScript (ES6+)', 'TypeScript', 'HTML5', 'CSS3 / SCSS', 'Java', 'Dart', 'SQL'],
+    skills: ['JavaScript (ES6+)', 'TypeScript', 'HTML5', 'CSS3 / SCSS', 'Java', 'Dart', 'SQL'],
   },
   {
     category: 'frameworks & libraries',
-    Tech_stack: ['React.js', 'Next.js', 'Material UI', 'Tailwind CSS', 'Flutter'],
+    skills: ['React.js', 'Next.js', 'Material UI', 'Tailwind CSS', 'Flutter'],
   },
   {
     category: 'testing',
-    Tech_stack: ['Jest', 'React Testing Library'],
+    skills: ['Jest', 'React Testing Library'],
   },
   {
     category: 'devops & tools',
-    Tech_stack: ['Git / GitHub', 'Azure DevOps CI/CD', 'ArgoCD', 'Kubernetes', 'Vercel'],
+    skills: ['Git / GitHub', 'Azure DevOps CI/CD', 'ArgoCD', 'Kubernetes', 'Vercel'],
   },
 ];
 
@@ -26,9 +26,9 @@ const collabAndCerts = [
 
 export default function TechStack() {
   return (
-    <section id="TechStack" className="py-10 sm:py-14">
+    <section id="tech-stack" className="py-10 sm:py-14">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="eyebrow">Tech_Stack</div>
+        <div className="eyebrow">Tech Stack</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
           Tools I reach for
         </h2>
@@ -44,7 +44,7 @@ export default function TechStack() {
                 {group.category}
               </div>
               <div className="flex flex-wrap gap-2">
-                {group.Tech_stack.map((skill) => (
+                {group.skills.map((skill) => (
                   <span
                     key={skill}
                     className="font-mono-brand text-[12.5px] border border-border px-2.5 py-1.5 rounded"

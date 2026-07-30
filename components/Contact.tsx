@@ -3,19 +3,16 @@
 import { useState } from 'react';
 import emailjs from 'emailjs-com';
 import toast, { Toaster } from 'react-hot-toast';
-import { useTheme } from 'next-themes';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [copied, setCopied] = useState(false);
-  const { resolvedTheme } = useTheme();
-  const isDarkMode = resolvedTheme === 'dark';
 
-  const getToastStyle = () => ({
-    background: isDarkMode ? '#ffffff' : '#000000',
-    color: isDarkMode ? '#000000' : '#ffffff',
-    border: isDarkMode ? '1px solid #e5e7eb' : '1px solid #374151',
-  });
+  const toastStyle = {
+    background: 'hsl(var(--foreground))',
+    color: 'hsl(var(--background))',
+    border: '1px solid hsl(var(--border))',
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,13 +57,23 @@ export default function Contact() {
       <Toaster
         position="bottom-right"
         toastOptions={{
-          style: getToastStyle(),
-          success: { iconTheme: { primary: isDarkMode ? '#000' : '#fff', secondary: isDarkMode ? '#fff' : '#000' } },
-          error: { iconTheme: { primary: isDarkMode ? '#000' : '#fff', secondary: isDarkMode ? '#fff' : '#000' } },
+          style: toastStyle,
+          success: {
+            iconTheme: {
+              primary: 'hsl(var(--background))',
+              secondary: 'hsl(var(--foreground))',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: 'hsl(var(--background))',
+              secondary: 'hsl(var(--foreground))',
+            },
+          },
         }}
       />
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="eyebrow">contact</div>
+        <div className="eyebrow">Contact</div>
         <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">Let&apos;s talk</h2>
         <p className="text-muted-foreground max-w-md mb-10">
           Open to frontend roles, internships, and interesting problems worth building for.
@@ -83,10 +90,9 @@ export default function Contact() {
             </button>
           </div>
           <div className="flex flex-wrap gap-2.5">
-            <a href="mailto:karthikamma2004@gmail.com" className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors">email ↗</a>
-            <a href="https://www.linkedin.com/in/karthik-s-kashyap/" target="_blank" rel="noopener noreferrer" className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors">linkedin ↗</a>
-            <a href="https://github.com/Karthik1772" target="_blank" rel="noopener noreferrer" className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors">github ↗</a>
-            <a href="tel:+919945681174" className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors">call ↗</a>
+            <a href="mailto:karthikamma2004@gmail.com" className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors">Email ↗</a>
+            <a href="https://www.linkedin.com/in/karthik-s-kashyap/" target="_blank" rel="noopener noreferrer" className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors">LinkedIn ↗</a>
+            <a href="https://github.com/Karthik1772" target="_blank" rel="noopener noreferrer" className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors">Github ↗</a>
           </div>
         </div>
 
@@ -104,7 +110,7 @@ export default function Contact() {
             type="submit"
             className="font-mono-brand text-[13px] px-6 py-3 rounded border border-foreground bg-foreground text-background hover:bg-[var(--clr-green)] hover:border-[var(--clr-green)] transition-colors"
           >
-            send message
+            Send Message
           </button>
         </form>
       </div>

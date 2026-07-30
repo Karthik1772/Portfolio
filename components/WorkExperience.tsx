@@ -4,7 +4,7 @@ import { Download } from "lucide-react";
 
 const experience = [
   {
-    tag: "2025.10 → now",
+    tag: "2025.10 → 2026.07",
     company: "Barracuda Networks",
     role: "Frontend Developer Intern · Data Protection Team · Bangalore",
     changes: [
@@ -28,8 +28,8 @@ const experience = [
 export default function WorkExperience() {
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "/Resume/KARTHIK-S-KASHYAP.pdf";
-    link.setAttribute("download", "Karthik_S_Kashyap.pdf");
+    link.href = "/resume/karthik-s-kashyap.pdf";
+    link.setAttribute("download", "karthik-s-kashyap.pdf");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -37,19 +37,18 @@ export default function WorkExperience() {
 
   return (
     <section
-      id="WorkExperience"
+      id="work-experience"
       className="py-10 sm:py-14 bg-card border-y border-border"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-4">
           <div>
-            <div className="eyebrow">work-experience</div>
+            <div className="eyebrow">Work Experience</div>
             <h2 className="font-display font-semibold text-[clamp(1.75rem,3.4vw,2.5rem)] mb-2">
               Where I&apos;ve shipped
             </h2>
             <p className="text-muted-foreground max-w-md">
-              Experience, logged like commits — what changed and what it
-              touched.
+              Experience, logged like commits — what changed and what it touched.
             </p>
           </div>
           <button
@@ -57,7 +56,7 @@ export default function WorkExperience() {
             className="font-mono-brand text-[13px] inline-flex items-center gap-2 px-5 py-3 rounded border border-foreground bg-foreground text-background hover:bg-[var(--clr-green)] hover:border-[var(--clr-green)] transition-colors self-start"
           >
             <Download size={15} />
-            download resume
+            Download Resume
           </button>
         </div>
 

@@ -8,9 +8,9 @@ import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
   { href: "/about", label: "About" },
-  { href: "/resume", label: "Work-Experience" },
+  { href: "/work-experience", label: "Work Experience" },
   { href: "/education", label: "Education" },
-  { href: "/skills", label: "Tech-Stack" },
+  { href: "/tech-stack", label: "Tech Stack" },
   { href: "/projects", label: "Projects" },
   { href: "/achievements", label: "Achievements" },
   { href: "/contact", label: "Contact" },

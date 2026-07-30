@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 
 const introScript = [
-  { text: "$ Who am i", cls: "text-[#7FE0AA]" },
+  { text: "$ Who am i", cls: "text-[var(--term-green)]" },
   { text: "Karthik — FrontEnd Developer, Mysore" },
   { text: "" },
 ];
@@ -14,11 +14,11 @@ type Command = { path: string; label: string };
 
 const commands: Record<string, Command> = {
   about: { path: "/about", label: "about.md" },
-  experience: { path: "/resume", label: "work-experience" },
-  "work-experience": { path: "/resume", label: "work-experience" },
+  experience: { path: "/work-experience", label: "work-experience" },
+  "work-experience": { path: "/work-experience", label: "work-experience" },
   education: { path: "/education", label: "education" },
-  stack: { path: "/skills", label: "tech-stack" },
-  "tech-stack": { path: "/skills", label: "tech-stack" },
+  stack: { path: "/tech-stack", label: "tech-stack" },
+  "tech-stack": { path: "/tech-stack", label: "tech-stack" },
   projects: { path: "/projects", label: "projects" },
   achievements: { path: "/achievements", label: "achievements" },
   contact: { path: "/contact", label: "contact" },
@@ -257,13 +257,13 @@ export default function Terminal({
   return (
     <div
       className="rounded-lg overflow-hidden border border-black/40 shadow-2xl cursor-text"
-      style={{ background: "#14181A" }}
+      style={{ background: "var(--term-bg)" }}
       onClick={() => inputRef.current?.focus()}
     >
       <div className="flex items-center gap-1.5 px-3.5 py-3 bg-white/5">
-        <span className="w-2.5 h-2.5 rounded-full bg-[#3A413C]" />
-        <span className="w-2.5 h-2.5 rounded-full bg-[#3A413C]" />
-        <span className="w-2.5 h-2.5 rounded-full bg-[#3A413C]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[var(--term-dot)]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[var(--term-dot)]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[var(--term-dot)]" />
         <span className="ml-2 font-mono-brand text-[11px] text-white/40">
           karthik@dev ~
         </span>
@@ -283,7 +283,7 @@ export default function Terminal({
       <div
         ref={scrollRef}
         className={`font-mono-brand text-[13.5px] leading-[1.75] px-5 py-5 overflow-y-auto ${heightClass}`}
-        style={{ color: "#D9F0E1" }}
+        style={{ color: "var(--term-text)" }}
       >
         {showIntro && <div ref={introRef} />}
         {!introDone && <span className="term-cursor" />}
@@ -295,10 +295,10 @@ export default function Terminal({
                 key={i}
                 className={
                   line.type === "cmd"
-                    ? "text-[#7FE0AA]"
+                    ? "text-[var(--term-green)]"
                     : line.type === "err"
-                      ? "text-[#E08A6A]"
-                      : "text-[#D9F0E1]/80"
+                      ? "text-[var(--term-error)]"
+                      : "text-[var(--term-text)]/80"
                 }
               >
                 {line.type === "cmd" ? `$ ${line.text}` : line.text}
@@ -312,7 +312,7 @@ export default function Terminal({
               }}
               className="flex items-center gap-2"
             >
-              <span className="text-[#7FE0AA]">$</span>
+              <span className="text-[var(--term-green)]">$</span>
               <input
                 ref={inputRef}
                 value={value}
@@ -324,7 +324,7 @@ export default function Terminal({
                 spellCheck={false}
                 autoComplete="off"
                 className="flex-1 bg-transparent outline-none font-mono-brand text-[13.5px]"
-                style={{ color: "#D9F0E1", caretColor: "var(--clr-green)" }}
+                style={{ color: "var(--term-text)", caretColor: "var(--clr-green)" }}
                 placeholder="type a command…"
               />
             </form>

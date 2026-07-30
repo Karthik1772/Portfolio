@@ -27,11 +27,11 @@ export default function TerminalDock() {
         <button
           onClick={() => setOpen(true)}
           className="font-mono-brand text-[13px] flex items-center gap-2 px-4 py-2.5 rounded-md border border-black/40 shadow-xl hover:opacity-90 transition-opacity"
-          style={{ background: '#14181A', color: '#7FE0AA' }}
+          style={{ background: 'var(--term-bg)', color: 'var(--term-green)' }}
           aria-label="Open terminal"
         >
           <TerminalIcon size={15} />
-          terminal
+          Terminal
         </button>
       )}
     </div>
