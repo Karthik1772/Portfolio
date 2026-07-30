@@ -8,10 +8,10 @@ const experience = [
     company: "Barracuda Networks",
     role: "Frontend Developer Intern · Data Protection Team · Bangalore",
     changes: [
-      "Shipped frontend features for enterprise cloud backup SaaS across the Reports and Backup Sources modules using React, Next.js, TypeScript and Material UI.",
+      "Shipped frontend features for enterprise cloud backup SaaS across the Unified Reports, Backup Sources and Settings Projects using React, Next.js, TypeScript and Material UI.",
       "Root-caused and resolved production issues in multi-tenant environments alongside cross-functional engineering teams.",
       "Built reusable components with Jest and React Testing Library coverage to cut regression risk.",
-      "Built two internal AI tools during AI Dev Days: Start-Story for Jira–Confluence sprint planning, and Self-Review for automated code-standards checks.",
+      "Built two internal AI tools during AI Dev Days: Start-Story for Jira-Confluence sprint planning, and Self-Review for automated code-standards checks.",
     ],
   },
   {
