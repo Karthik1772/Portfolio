@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function SkillsPage() {
   return (
-    <main className="flex-1 flex flex-col justify-center">
+    <main className="flex-1 flex flex-col">
       <Skills />
     </main>
   );

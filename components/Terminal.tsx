@@ -36,6 +36,7 @@ export const commandList = [
 ];
 
 const CMD_HISTORY_KEY = "terminal-cmd-history";
+const SESSION_KEY = "terminal-session-history";
 const MAX_HISTORY = 50;
 
 type HistoryLine = { type: "cmd" | "out" | "err"; text: string };
@@ -74,6 +75,32 @@ export default function Terminal({
       // ignore malformed/unavailable storage
     }
   }, []);
+
+  // Restore the visible session transcript too, so switching pages doesn't
+  // wipe out the commands/output you already typed — same as a real terminal
+  // that keeps its scrollback when you're still in the same shell session.
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(SESSION_KEY);
+      if (saved) setHistory(JSON.parse(saved));
+    } catch {
+      // ignore malformed/unavailable storage
+    }
+  }, []);
+
+  const setHistoryAndPersist = (
+    updater: HistoryLine[] | ((h: HistoryLine[]) => HistoryLine[]),
+  ) => {
+    setHistory((h) => {
+      const next = typeof updater === "function" ? updater(h) : updater;
+      try {
+        window.localStorage.setItem(SESSION_KEY, JSON.stringify(next));
+      } catch {
+        // ignore malformed/unavailable storage
+      }
+      return next;
+    });
+  };
 
   const pushToCmdHistory = (cmd: string) => {
     setCmdHistory((h) => {
@@ -120,9 +147,16 @@ export default function Terminal({
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    let hasSession = false;
+    try {
+      const saved = window.localStorage.getItem(SESSION_KEY);
+      hasSession = !!saved && JSON.parse(saved).length > 0;
+    } catch {
+      hasSession = false;
+    }
     const full = introScript.map((l) => l.text).join("\n");
 
-    if (reduced || !introRef.current) {
+    if (reduced || hasSession || !introRef.current) {
       renderIntro(full.length);
       setIntroDone(true);
       return;
@@ -169,17 +203,32 @@ export default function Terminal({
     pushToCmdHistory(trimmed);
 
     if (clean === "clear") {
-      setHistory([]);
+      setHistoryAndPersist([]);
       return;
     }
 
     if (clean === "help" || clean === "ls") {
-      setHistory((h) => [
+      setHistoryAndPersist((h) => [
         ...h,
         { type: "cmd", text: raw },
         {
           type: "out",
-          text: `available: ${commandList.join(" ")} /home /clear`,
+          text: `available: ${commandList.join(" ")} /home /clear /history`,
+        },
+      ]);
+      return;
+    }
+
+    if (clean === "history") {
+      setHistoryAndPersist((h) => [
+        ...h,
+        { type: "cmd", text: raw },
+        {
+          type: "out",
+          text:
+            cmdHistory.length === 0
+              ? "no commands yet"
+              : cmdHistory.map((c, i) => `  ${i + 1}  ${c}`).join("\n"),
         },
       ]);
       return;
@@ -187,7 +236,7 @@ export default function Terminal({
 
     const match = commands[clean];
     if (match) {
-      setHistory((h) => [
+      setHistoryAndPersist((h) => [
         ...h,
         { type: "cmd", text: raw },
         { type: "out", text: `→ cd ${match.label}` },
@@ -197,7 +246,7 @@ export default function Terminal({
         onNavigate?.();
       }, 350);
     } else {
-      setHistory((h) => [
+      setHistoryAndPersist((h) => [
         ...h,
         { type: "cmd", text: raw },
         { type: "err", text: `command not found: ${clean} — try /help` },
