@@ -7,13 +7,13 @@ import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
-  { href: "/about", label: "about" },
-  { href: "/resume", label: "work-experience" },
-  { href: "/education", label: "education" },
-  { href: "/skills", label: "tech-stack" },
-  { href: "/projects", label: "projects" },
-  { href: "/achievements", label: "achievements" },
-  { href: "/contact", label: "contact" },
+  { href: "/about", label: "About" },
+  { href: "/resume", label: "Work-Experience" },
+  { href: "/education", label: "Education" },
+  { href: "/skills", label: "Tech-Stack" },
+  { href: "/projects", label: "Projects" },
+  { href: "/achievements", label: "Achievements" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {

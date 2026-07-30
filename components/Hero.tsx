@@ -11,9 +11,7 @@ export default function Hero() {
           <div>
             <div className="eyebrow">whoami</div>
             <h1 className="font-display font-semibold leading-[1.02] text-[clamp(2.4rem,5.6vw,4rem)]">
-              Karthik S
-              <br />
-              Kashyap
+              Karthik S Kashyap
             </h1>
             <div
               className="font-mono-brand text-sm mt-3.5"
