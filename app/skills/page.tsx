@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import RevealObserver from '@/components/RevealObserver';
 import Skills from '@/components/Skills';
 
 export const metadata: Metadata = {
@@ -8,11 +7,8 @@ export const metadata: Metadata = {
 
 export default function SkillsPage() {
   return (
-    <>
-      <RevealObserver />
-      <main className="min-h-screen">
-        <Skills />
-      </main>
-    </>
+    <main className="min-h-[calc(100vh-4rem)] flex flex-col justify-center">
+      <Skills />
+    </main>
   );
 }
