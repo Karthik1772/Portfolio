@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 
 const introScript = [
-  { text: "$ whoami", cls: "text-[#7FE0AA]" },
-  { text: "karthik — frontend developer, bengaluru" },
+  { text: "$ Who am i", cls: "text-[#7FE0AA]" },
+  { text: "Karthik — FrontEnd Developer, Mysore" },
   { text: "" },
 ];
 
@@ -15,12 +15,8 @@ type Command = { path: string; label: string };
 const commands: Record<string, Command> = {
   about: { path: "/about", label: "about.md" },
   experience: { path: "/resume", label: "work-experience" },
-  "work-experience": { path: "/resume", label: "work-experience" },
-  resume: { path: "/resume", label: "work-experience" },
   education: { path: "/education", label: "education" },
-  "tech-stack": { path: "/skills", label: "tech-stack" },
   stack: { path: "/skills", label: "tech-stack" },
-  skills: { path: "/skills", label: "tech-stack" },
   projects: { path: "/projects", label: "projects" },
   achievements: { path: "/achievements", label: "achievements" },
   contact: { path: "/contact", label: "contact" },
@@ -98,7 +94,6 @@ export default function Terminal({
     }
 
     return () => window.clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
