@@ -35,21 +35,20 @@ export default function About() {
               Frontend, with an electronics engineer&apos;s habits
             </h2>
             <p className="text-muted-foreground mb-5 max-w-2xl">
-              I recently completed my B.E. in Electronics &amp; Communication
-              Engineering and now work as a frontend developer — which mostly
-              means I default to thinking in signal paths, states, and failure
-              modes before I think in components. Currently at Barracuda
-              Networks&apos; Data Protection team, building the interfaces
-              enterprise customers use to manage cloud backups. Before that, at
-              IIIT Dharwad, building the UI for an AI sustainability tool that
-              turned ML predictions into recommendations people could actually
-              act on.
+              Frontend Developer with a Bachelor&apos;s degree in Electronics
+              &amp; Communication Engineering and hands-on industry experience
+              building scalable enterprise SaaS applications using React,
+              Next.js, TypeScript, and modern frontend technologies. Experienced
+              in developing responsive user interfaces, integrating REST APIs,
+              debugging production issues, and collaborating within Agile teams
+              to deliver reliable, production-ready software. Passionate about
+              building clean, scalable applications and continuously learning
+              modern web technologies.
             </p>
             <p className="text-muted-foreground max-w-2xl">
-              Outside of work I coordinate Edwin Lab, AIET&apos;s open-source
-              student club, and run STEM workshops for Scouts &amp; Guides
-              across Karnataka — teaching the same instinct I use at work: build
-              the small thing, ship it, see if it holds up.
+              Beyond development, I enjoy exploring new technologies and
+              building side projects that expand my skills. I believe great software
+              is built through curiosity, continuous learning, and teamwork.
             </p>
           </div>
 
