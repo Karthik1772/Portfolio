@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const introScript = [
   { text: '$ whoami', cls: 'text-[#7FE0AA]' },
@@ -14,34 +16,28 @@ const introScript = [
   { text: '' },
 ];
 
-type Command = { targetId: string; label: string };
+type Command = { path: string; label: string };
 
 const commands: Record<string, Command> = {
-  about: { targetId: 'about', label: 'about.md' },
-  log: { targetId: 'resume', label: 'build-log' },
-  experience: { targetId: 'resume', label: 'build-log' },
-  resume: { targetId: 'resume', label: 'build-log' },
-  stack: { targetId: 'skills', label: 'stack.json' },
-  skills: { targetId: 'skills', label: 'stack.json' },
-  releases: { targetId: 'projects', label: 'releases' },
-  projects: { targetId: 'projects', label: 'releases' },
-  achievements: { targetId: 'achievements', label: 'achievements' },
-  contact: { targetId: 'contact', label: 'contact' },
+  about: { path: '/about', label: 'about.md' },
+  log: { path: '/resume', label: 'build-log' },
+  experience: { path: '/resume', label: 'build-log' },
+  resume: { path: '/resume', label: 'build-log' },
+  stack: { path: '/skills', label: 'stack.json' },
+  skills: { path: '/skills', label: 'stack.json' },
+  releases: { path: '/projects', label: 'releases' },
+  projects: { path: '/projects', label: 'releases' },
+  achievements: { path: '/achievements', label: 'achievements' },
+  contact: { path: '/contact', label: 'contact' },
+  home: { path: '/', label: 'home' },
 };
 
 const commandList = ['/about', '/log', '/stack', '/releases', '/achievements', '/contact'];
 
 type HistoryLine = { type: 'cmd' | 'out' | 'err'; text: string };
 
-function jumpTo(targetId: string) {
-  const el = document.getElementById(targetId);
-  if (!el) return;
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  el.classList.add('cmd-highlight');
-  window.setTimeout(() => el.classList.remove('cmd-highlight'), 1200);
-}
-
 export default function Hero() {
+  const router = useRouter();
   const introRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [introDone, setIntroDone] = useState(false);
@@ -103,7 +99,7 @@ export default function Hero() {
       setHistory((h) => [
         ...h,
         { type: 'cmd', text: raw },
-        { type: 'out', text: `available: ${commandList.join(' ')} /clear` },
+        { type: 'out', text: `available: ${commandList.join(' ')} /home /clear` },
       ]);
       return;
     }
@@ -113,9 +109,9 @@ export default function Hero() {
       setHistory((h) => [
         ...h,
         { type: 'cmd', text: raw },
-        { type: 'out', text: `→ opening ${match.label}` },
+        { type: 'out', text: `→ cd ${match.label}` },
       ]);
-      jumpTo(match.targetId);
+      window.setTimeout(() => router.push(match.path), 350);
     } else {
       setHistory((h) => [
         ...h,
@@ -138,7 +134,7 @@ export default function Hero() {
             </h1>
             <div
               className="font-mono-brand text-sm mt-3.5"
-              style={{ color: "var(--clr-green)" }}
+              style={{ color: 'var(--clr-green)' }}
             >
               Frontend Developer — React · Next.js · TypeScript
             </div>
@@ -149,12 +145,12 @@ export default function Hero() {
               work for the person using it.
             </p>
             <div className="flex flex-wrap gap-3 mt-8">
-              <a
-                href="#contact"
+              <Link
+                href="/contact"
                 className="font-mono-brand text-[13px] px-5 py-3 rounded border border-foreground bg-foreground text-background hover:bg-[var(--clr-green)] hover:border-[var(--clr-green)] transition-colors"
               >
                 get in touch
-              </a>
+              </Link>
 
               <a
                 href="https://github.com/Karthik1772"
@@ -170,7 +166,7 @@ export default function Hero() {
           <div>
             <div
               className="rounded-lg overflow-hidden border border-black/40 shadow-2xl cursor-text"
-              style={{ background: "#14181A" }}
+              style={{ background: '#14181A' }}
               onClick={() => inputRef.current?.focus()}
             >
               <div className="flex gap-1.5 px-3.5 py-3 bg-white/5">
@@ -180,7 +176,7 @@ export default function Hero() {
               </div>
               <div
                 className="font-mono-brand text-[13.5px] leading-[1.75] px-5 pt-5 pb-5 min-h-[230px]"
-                style={{ color: "#D9F0E1" }}
+                style={{ color: '#D9F0E1' }}
               >
                 <div ref={introRef} />
                 {!introDone && <span className="term-cursor" />}
@@ -191,21 +187,21 @@ export default function Hero() {
                       <div
                         key={i}
                         className={
-                          line.type === "cmd"
-                            ? "text-[#7FE0AA]"
-                            : line.type === "err"
-                              ? "text-[#E08A6A]"
-                              : "text-[#D9F0E1]/80"
+                          line.type === 'cmd'
+                            ? 'text-[#7FE0AA]'
+                            : line.type === 'err'
+                              ? 'text-[#E08A6A]'
+                              : 'text-[#D9F0E1]/80'
                         }
                       >
-                        {line.type === "cmd" ? `$ ${line.text}` : line.text}
+                        {line.type === 'cmd' ? `$ ${line.text}` : line.text}
                       </div>
                     ))}
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
                         runCommand(value);
-                        setValue("");
+                        setValue('');
                       }}
                       className="flex items-center gap-2"
                     >
@@ -218,8 +214,8 @@ export default function Hero() {
                         autoComplete="off"
                         className="flex-1 bg-transparent outline-none font-mono-brand text-[13.5px]"
                         style={{
-                          color: "#D9F0E1",
-                          caretColor: "var(--clr-green)",
+                          color: '#D9F0E1',
+                          caretColor: 'var(--clr-green)',
                         }}
                         placeholder="type a command…"
                       />
@@ -229,7 +225,7 @@ export default function Hero() {
               </div>
             </div>
             <p className="font-mono-brand text-xs text-muted-foreground mt-3 px-1">
-              try {commandList.join(" · ")}
+              try {commandList.join(' · ')}
             </p>
           </div>
         </div>
