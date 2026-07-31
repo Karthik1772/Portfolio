@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X, ZoomIn } from "lucide-react";
 
 const timeline = [
@@ -84,6 +84,10 @@ const leadership = [
   },
 ];
 
+// Small delay before closing on mouse-leave so moving the cursor from the
+// thumbnail toward the modal doesn't cause it to flicker shut.
+const CLOSE_DELAY_MS = 150;
+
 export default function Achievements() {
   const [lightbox, setLightbox] = useState<{
     image: string;
@@ -91,14 +95,50 @@ export default function Achievements() {
     year: string;
   } | null>(null);
 
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearCloseTimer = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+
+  const openLightbox = (item: {
+    image?: string;
+    title: string;
+    year: string;
+  }) => {
+    if (!item.image) return;
+    clearCloseTimer();
+    setLightbox({ image: item.image, title: item.title, year: item.year });
+  };
+
+  const scheduleClose = () => {
+    clearCloseTimer();
+    closeTimer.current = setTimeout(() => {
+      setLightbox(null);
+    }, CLOSE_DELAY_MS);
+  };
+
+  const closeNow = () => {
+    clearCloseTimer();
+    setLightbox(null);
+  };
+
   useEffect(() => {
     if (!lightbox) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "Escape") closeNow();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lightbox]);
+
+  useEffect(() => {
+    return () => clearCloseTimer();
+  }, []);
 
   return (
     <section id="achievements" className="py-10 sm:py-14">
@@ -120,13 +160,11 @@ export default function Achievements() {
                 {item.image && (
                   <button
                     type="button"
-                    onClick={() =>
-                      setLightbox({
-                        image: item.image!,
-                        title: item.title,
-                        year: item.year,
-                      })
-                    }
+                    onMouseEnter={() => openLightbox(item)}
+                    onMouseLeave={scheduleClose}
+                    onFocus={() => openLightbox(item)}
+                    onBlur={scheduleClose}
+                    onClick={() => openLightbox(item)}
                     className="group relative w-full sm:w-24 h-16 rounded-md border border-border shrink-0 overflow-hidden cursor-zoom-in transition-shadow duration-300 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2"
                     style={{ ["--tw-ring-color" as any]: "var(--clr-green)" }}
                     aria-label={`View photo: ${item.title}`}
@@ -200,14 +238,16 @@ export default function Achievements() {
       {lightbox && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200"
-          onClick={() => setLightbox(null)}
+          onClick={closeNow}
+          onMouseEnter={clearCloseTimer}
+          onMouseLeave={scheduleClose}
           role="dialog"
           aria-modal="true"
           aria-label={lightbox.title}
         >
           <button
             type="button"
-            onClick={() => setLightbox(null)}
+            onClick={closeNow}
             className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
             aria-label="Close photo"
           >
