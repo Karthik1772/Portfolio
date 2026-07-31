@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { X, ZoomIn } from "lucide-react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 
 const timeline = [
   {
@@ -9,7 +9,7 @@ const timeline = [
     title: "1st place, Fusion Techathon 3.0",
     description:
       "Organized by the Department of AIML at Alva's Institute of Engineering & Technology.",
-    image: "/img/fusion/1.jpg",
+    images: ["/img/fusion/1.jpg", "/img/fusion/2.jpg"],
   },
   {
     year: "2024",
@@ -17,53 +17,58 @@ const timeline = [
       "Chest Cancer Detection Using AI — presented at Infosys Engineering Next",
     description:
       "Presented the project at Infosys' Electronic City campus in Bangalore.",
-    image: "/img/infosys-presentation/1.jpg",
+    images: [
+      "/img/infosys-presentation/1.jpg",
+      "/img/infosys-presentation/2.jpg",
+      "/img/infosys-presentation/3.jpg",
+      "/img/infosys-presentation/4.jpg",
+    ],
   },
   {
     year: "2024",
     title: "Open Source India, NIMHANS Convention Centre",
     description:
       "Attended talks and met practitioners across the Indian open-source ecosystem.",
-    image: "/img/osi/1.jpg",
+    images: ["/img/osi/1.jpg", "/img/osi/2.jpg", "/img/osi/3.jpg"],
   },
   {
     year: "2024",
     title: "Volunteer, Alva's Pragathi",
     description:
       "Helped coordinate recruitment activities at South India's largest placement drive.",
-    image: "/img/pragathi/1.jpg",
+    images: ["/img/pragathi/1.jpg"],
   },
   {
     year: "2023",
     title: "1st place, Technova — Algoriz Club (CSE, AIET)",
     description: "Team win at the department's flagship technical competition.",
-    image: "/img/algoriz/1.jpg",
+    images: ["/img/algoriz/1.jpg", "/img/algoriz/2.jpg", "/img/algoriz/3.jpg"],
   },
-  {
-    year: "2023",
-    title: "Speaker, International Cultural Jamboree",
-    description:
-      "Represented Chirp Club and spoke on avian awareness to 3,000+ attendees.",
-  },
+  // {
+  //   year: "2023",
+  //   title: "Speaker, International Cultural Jamboree",
+  //   description:
+  //     "Represented Chirp Club and spoke on avian awareness to 3,000+ attendees.",
+  // },
   {
     year: "2023",
     title: "Participant, Symbiot Hackathon — VVCE",
     description:
       "Collaborative build in a competitive, cross-college hackathon setting.",
-    image: "/img/symbiot/1.jpg",
+    images: ["/img/symbiot/1.jpg", "/img/symbiot/2.jpg", "/img/symbiot/3.jpg"],
   },
   {
     year: "2023",
     title: "STEM workshops for Scouts & Guides",
     description:
       "Led sessions for 100+ students as Student Leader of Edwin Lab.",
-    image: "/img/stem/1.jpg",
+    images: ["/img/stem/1.jpg", "/img/stem/2.jpg", "/img/stem/3.jpg"],
   },
   {
     year: "2022",
     title: "3rd place, National Mathematics Day",
     description: "Department of Mathematics competition, AIET.",
-    image: "/img/mathematics/mathematics-day.jpg",
+    images: ["/img/mathematics/mathematics-day.jpg"],
   },
 ];
 
@@ -88,9 +93,69 @@ const leadership = [
 // thumbnail toward the modal doesn't cause it to flicker shut.
 const CLOSE_DELAY_MS = 150;
 
+// How often thumbnails auto-cycle between photos, and how often the
+// lightbox advances to the next photo when left untouched.
+const THUMB_INTERVAL_MS = 2200;
+const LIGHTBOX_AUTOPLAY_MS = 3000;
+
+type TimelineItem = {
+  year: string;
+  title: string;
+  description: string;
+  images?: string[];
+};
+
+function Thumbnail({ item }: { item: TimelineItem }) {
+  const images = item.images ?? [];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % images.length);
+    }, THUMB_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [images.length]);
+
+  if (images.length === 0) return null;
+
+  return (
+    <div className="relative w-full h-full">
+      {images.map((src, i) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={src}
+          src={src}
+          alt={item.title}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-110"
+          style={{
+            opacity: i === index ? 1 : 0,
+            transition: "opacity 0.6s ease-in-out",
+          }}
+        />
+      ))}
+      {images.length > 1 && (
+        <span className="absolute bottom-1 right-1 flex gap-0.5 z-10">
+          {images.map((_, i) => (
+            <span
+              key={i}
+              className="w-1 h-1 rounded-full"
+              style={{
+                backgroundColor:
+                  i === index ? "var(--clr-green)" : "rgba(255,255,255,0.5)",
+              }}
+            />
+          ))}
+        </span>
+      )}
+    </div>
+  );
+}
+
 export default function Achievements() {
   const [lightbox, setLightbox] = useState<{
-    image: string;
+    images: string[];
+    index: number;
     title: string;
     year: string;
   } | null>(null);
@@ -104,14 +169,15 @@ export default function Achievements() {
     }
   };
 
-  const openLightbox = (item: {
-    image?: string;
-    title: string;
-    year: string;
-  }) => {
-    if (!item.image) return;
+  const openLightbox = (item: TimelineItem) => {
+    if (!item.images || item.images.length === 0) return;
     clearCloseTimer();
-    setLightbox({ image: item.image, title: item.title, year: item.year });
+    setLightbox({
+      images: item.images,
+      index: 0,
+      title: item.title,
+      year: item.year,
+    });
   };
 
   const scheduleClose = () => {
@@ -126,15 +192,39 @@ export default function Achievements() {
     setLightbox(null);
   };
 
+  const goNext = useCallback(() => {
+    setLightbox((lb) =>
+      lb ? { ...lb, index: (lb.index + 1) % lb.images.length } : lb,
+    );
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setLightbox((lb) =>
+      lb
+        ? { ...lb, index: (lb.index - 1 + lb.images.length) % lb.images.length }
+        : lb,
+    );
+  }, []);
+
+  // Keyboard navigation: Escape closes, arrow keys move through the slideshow.
   useEffect(() => {
     if (!lightbox) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeNow();
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") goPrev();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lightbox]);
+  }, [lightbox, goNext, goPrev]);
+
+  // Autoplay the slideshow while the lightbox is open.
+  useEffect(() => {
+    if (!lightbox || lightbox.images.length <= 1) return;
+    const id = setInterval(goNext, LIGHTBOX_AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, [lightbox, goNext]);
 
   useEffect(() => {
     return () => clearCloseTimer();
@@ -157,7 +247,7 @@ export default function Achievements() {
                 style={{ border: "2px solid var(--clr-green)" }}
               />
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                {item.image && (
+                {item.images && item.images.length > 0 && (
                   <button
                     type="button"
                     onMouseEnter={() => openLightbox(item)}
@@ -167,14 +257,9 @@ export default function Achievements() {
                     onClick={() => openLightbox(item)}
                     className="group relative w-full sm:w-24 h-16 rounded-md border border-border shrink-0 overflow-hidden cursor-zoom-in transition-shadow duration-300 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2"
                     style={{ ["--tw-ring-color" as any]: "var(--clr-green)" }}
-                    aria-label={`View photo: ${item.title}`}
+                    aria-label={`View photos: ${item.title}`}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-110"
-                    />
+                    <Thumbnail item={item} />
                     <span className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                       <ZoomIn
                         size={16}
@@ -255,15 +340,38 @@ export default function Achievements() {
           </button>
 
           <div
-            className="max-w-3xl w-full"
+            className="max-w-3xl w-full relative"
             onClick={(e) => e.stopPropagation()}
           >
+            {lightbox.images.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={goPrev}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  type="button"
+                  onClick={goNext}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </>
+            )}
+
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={lightbox.image}
+              key={lightbox.images[lightbox.index]}
+              src={lightbox.images[lightbox.index]}
               alt={lightbox.title}
               className="w-full max-h-[75vh] object-contain rounded-md shadow-2xl"
             />
+
             <div className="mt-4 text-center">
               <div
                 className="font-mono-brand text-xs"
@@ -274,6 +382,28 @@ export default function Achievements() {
               <h4 className="text-white font-semibold text-base mt-1">
                 {lightbox.title}
               </h4>
+
+              {lightbox.images.length > 1 && (
+                <div className="flex items-center justify-center gap-1.5 mt-3">
+                  {lightbox.images.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() =>
+                        setLightbox((lb) => (lb ? { ...lb, index: i } : lb))
+                      }
+                      className="w-1.5 h-1.5 rounded-full transition-colors"
+                      style={{
+                        backgroundColor:
+                          i === lightbox.index
+                            ? "var(--term-green)"
+                            : "rgba(255,255,255,0.35)",
+                      }}
+                      aria-label={`Go to photo ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
