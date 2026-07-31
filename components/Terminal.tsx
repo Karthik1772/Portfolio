@@ -2,13 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Terminal as XTerm } from "@xterm/xterm";
+import { FitAddon } from "@xterm/addon-fit";
 import { X } from "lucide-react";
+import "@xterm/xterm/css/xterm.css";
 
-const introScript = [
-  { text: "$ Who am i", cls: "text-[var(--term-green)]" },
-  { text: "Karthik — FrontEnd Developer, Mysore" },
-  { text: "" },
-];
+const introLines = ["$ Who Am I", "Karthik — FrontEnd Developer, Mysore", ""];
 
 type Command = { path: string; label: string };
 
@@ -48,6 +47,13 @@ type TerminalProps = {
   onNavigate?: () => void;
 };
 
+// ANSI helpers — colors pulled from the same --term-* tokens the rest of
+// the site's terminal chrome uses, so the real xterm instance matches.
+const GREEN = "\x1b[38;2;127;224;170m";
+const ERROR = "\x1b[38;2;224;138;106m";
+const DIM = "\x1b[38;2;217;240;225;2m";
+const RESET = "\x1b[0m";
+
 export default function Terminal({
   showIntro = true,
   heightClass = "h-[280px]",
@@ -55,217 +61,285 @@ export default function Terminal({
   onNavigate,
 }: TerminalProps) {
   const router = useRouter();
-  const introRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [introDone, setIntroDone] = useState(!showIntro);
-  const [history, setHistory] = useState<HistoryLine[]>([]);
-  const [value, setValue] = useState("");
-  const [cmdHistory, setCmdHistory] = useState<string[]>([]);
-  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const termRef = useRef<XTerm | null>(null);
+  const fitRef = useRef<FitAddon | null>(null);
+  const bufferRef = useRef("");
+  const cmdHistoryRef = useRef<string[]>([]);
+  const historyIndexRef = useRef(-1);
   const draftRef = useRef("");
+  const readyRef = useRef(false);
+  const [isReady, setIsReady] = useState(false);
 
-  // Load previously typed commands so the up/down arrows have history
-  // to page through, even after navigating between pages or reloading.
-  useEffect(() => {
+  const writePrompt = () => {
+    termRef.current?.write(`\r\n${GREEN}$ ${RESET}`);
+  };
+
+  const setLine = (next: string) => {
+    const term = termRef.current;
+    if (!term) return;
+    const current = bufferRef.current;
+    if (current.length > 0) {
+      term.write("\b \b".repeat(current.length));
+    }
+    bufferRef.current = next;
+    term.write(next);
+  };
+
+  const persistHistory = (line: HistoryLine) => {
     try {
-      const saved = window.localStorage.getItem(CMD_HISTORY_KEY);
-      if (saved) setCmdHistory(JSON.parse(saved));
+      const saved = window.localStorage.getItem(SESSION_KEY);
+      const list: HistoryLine[] = saved ? JSON.parse(saved) : [];
+      const next = [...list, line].slice(-200);
+      window.localStorage.setItem(SESSION_KEY, JSON.stringify(next));
     } catch {
       // ignore malformed/unavailable storage
     }
-  }, []);
+  };
 
-  // Restore the visible session transcript too, so switching pages doesn't
-  // wipe out the commands/output you already typed — same as a real terminal
-  // that keeps its scrollback when you're still in the same shell session.
-  useEffect(() => {
+  const pushCmdHistory = (cmd: string) => {
+    const list = cmdHistoryRef.current;
+    if (list[list.length - 1] === cmd) return;
+    const next = [...list, cmd].slice(-MAX_HISTORY);
+    cmdHistoryRef.current = next;
     try {
-      const saved = window.localStorage.getItem(SESSION_KEY);
-      if (saved) setHistory(JSON.parse(saved));
+      window.localStorage.setItem(CMD_HISTORY_KEY, JSON.stringify(next));
     } catch {
       // ignore malformed/unavailable storage
     }
-  }, []);
-
-  const setHistoryAndPersist = (
-    updater: HistoryLine[] | ((h: HistoryLine[]) => HistoryLine[]),
-  ) => {
-    setHistory((h) => {
-      const next = typeof updater === "function" ? updater(h) : updater;
-      try {
-        window.localStorage.setItem(SESSION_KEY, JSON.stringify(next));
-      } catch {
-        // ignore malformed/unavailable storage
-      }
-      return next;
-    });
+    historyIndexRef.current = -1;
   };
-
-  const pushToCmdHistory = (cmd: string) => {
-    setCmdHistory((h) => {
-      if (h[h.length - 1] === cmd) return h;
-      const next = [...h, cmd].slice(-MAX_HISTORY);
-      try {
-        window.localStorage.setItem(CMD_HISTORY_KEY, JSON.stringify(next));
-      } catch {
-        // ignore malformed/unavailable storage
-      }
-      return next;
-    });
-    setHistoryIndex(-1);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      if (cmdHistory.length === 0) return;
-      setHistoryIndex((idx) => {
-        if (idx === -1) draftRef.current = value;
-        const nextIdx = idx === -1 ? cmdHistory.length - 1 : Math.max(0, idx - 1);
-        setValue(cmdHistory[nextIdx]);
-        return nextIdx;
-      });
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault();
-      if (historyIndex === -1) return;
-      setHistoryIndex((idx) => {
-        const nextIdx = idx + 1;
-        if (nextIdx >= cmdHistory.length) {
-          setValue(draftRef.current);
-          return -1;
-        }
-        setValue(cmdHistory[nextIdx]);
-        return nextIdx;
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (!showIntro) return;
-
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    let hasSession = false;
-    try {
-      const saved = window.localStorage.getItem(SESSION_KEY);
-      hasSession = !!saved && JSON.parse(saved).length > 0;
-    } catch {
-      hasSession = false;
-    }
-    const full = introScript.map((l) => l.text).join("\n");
-
-    if (reduced || hasSession || !introRef.current) {
-      renderIntro(full.length);
-      setIntroDone(true);
-      return;
-    }
-
-    let i = 0;
-    const id = window.setInterval(() => {
-      i += 1;
-      renderIntro(i);
-      if (i >= full.length) {
-        window.clearInterval(id);
-        setTimeout(() => setIntroDone(true), 200);
-      }
-    }, 12);
-
-    function renderIntro(count: number) {
-      const shown = full.slice(0, count);
-      const shownLines = shown.split("\n");
-      if (!introRef.current) return;
-      introRef.current.innerHTML = shownLines
-        .map((line, idx) => {
-          const original = introScript[idx];
-          const cls = original?.cls ?? "";
-          return `<div class="${cls}">${line || "&nbsp;"}</div>`;
-        })
-        .join("");
-    }
-
-    return () => window.clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    if (introDone) inputRef.current?.focus();
-  }, [introDone]);
-
-  useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
-  }, [history, introDone]);
 
   const runCommand = (raw: string) => {
+    const term = termRef.current;
+    if (!term) return;
     const trimmed = raw.trim();
-    if (!trimmed) return;
+    if (!trimmed) {
+      writePrompt();
+      return;
+    }
     const clean = trimmed.toLowerCase().replace(/^\//, "");
-    pushToCmdHistory(trimmed);
+    pushCmdHistory(trimmed);
 
     if (clean === "clear") {
-      setHistoryAndPersist([]);
+      term.clear();
+      try {
+        window.localStorage.setItem(SESSION_KEY, "[]");
+      } catch {
+        // ignore
+      }
+      writePrompt();
       return;
     }
 
     if (clean === "help" || clean === "ls") {
-      setHistoryAndPersist((h) => [
-        ...h,
-        { type: "cmd", text: raw },
-        {
-          type: "out",
-          text: `available: ${commandList.join(" ")} /home /clear /history`,
-        },
-      ]);
+      const text = `available: ${commandList.join(" ")} /home /clear /history`;
+      term.write(`\r\n${text}`);
+      persistHistory({ type: "cmd", text: raw });
+      persistHistory({ type: "out", text });
+      writePrompt();
       return;
     }
 
     if (clean === "history") {
-      setHistoryAndPersist((h) => [
-        ...h,
-        { type: "cmd", text: raw },
-        {
-          type: "out",
-          text:
-            cmdHistory.length === 0
-              ? "no commands yet"
-              : cmdHistory.map((c, i) => `  ${i + 1}  ${c}`).join("\n"),
-        },
-      ]);
+      const text =
+        cmdHistoryRef.current.length === 0
+          ? "no commands yet"
+          : cmdHistoryRef.current
+              .map((c, i) => `  ${i + 1}  ${c}`)
+              .join("\r\n");
+      term.write(`\r\n${text}`);
+      persistHistory({ type: "cmd", text: raw });
+      persistHistory({ type: "out", text });
+      writePrompt();
       return;
     }
 
     const match = commands[clean];
     if (match) {
-      setHistoryAndPersist((h) => [
-        ...h,
-        { type: "cmd", text: raw },
-        { type: "out", text: `→ cd ${match.label}` },
-      ]);
+      const text = `→ cd ${match.label}`;
+      term.write(`\r\n${GREEN}${text}${RESET}`);
+      persistHistory({ type: "cmd", text: raw });
+      persistHistory({ type: "out", text });
       window.setTimeout(() => {
         router.push(match.path);
         onNavigate?.();
       }, 350);
-    } else {
-      setHistoryAndPersist((h) => [
-        ...h,
-        { type: "cmd", text: raw },
-        { type: "err", text: `command not found: ${clean} — try /help` },
-      ]);
+      return;
     }
+
+    const text = `command not found: ${clean} — try /help`;
+    term.write(`\r\n${ERROR}${text}${RESET}`);
+    persistHistory({ type: "cmd", text: raw });
+    persistHistory({ type: "err", text });
+    writePrompt();
   };
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const term = new XTerm({
+      fontFamily:
+        '"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace',
+      fontSize: 13,
+      lineHeight: 1.5,
+      cursorBlink: true,
+      convertEol: true,
+      disableStdin: false,
+      scrollback: 500,
+      theme: {
+        background: "#14181a",
+        foreground: "#d9f0e1",
+        cursor: "#7fe0aa",
+        cursorAccent: "#14181a",
+        selectionBackground: "rgba(127, 224, 170, 0.3)",
+      },
+    });
+    const fit = new FitAddon();
+    term.loadAddon(fit);
+    term.open(containerRef.current);
+    fit.fit();
+    termRef.current = term;
+    fitRef.current = fit;
+
+    try {
+      const savedCmds = window.localStorage.getItem(CMD_HISTORY_KEY);
+      if (savedCmds) cmdHistoryRef.current = JSON.parse(savedCmds);
+    } catch {
+      // ignore
+    }
+
+    let savedSession: HistoryLine[] = [];
+    try {
+      const raw = window.localStorage.getItem(SESSION_KEY);
+      if (raw) savedSession = JSON.parse(raw);
+    } catch {
+      // ignore
+    }
+
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const replaySession = () => {
+      savedSession.forEach((line) => {
+        if (line.type === "cmd") {
+          term.write(`\r\n${GREEN}$ ${RESET}${line.text}`);
+        } else if (line.type === "err") {
+          term.write(`\r\n${ERROR}${line.text}${RESET}`);
+        } else {
+          term.write(`\r\n${DIM}${line.text}${RESET}`);
+        }
+      });
+      writePrompt();
+      readyRef.current = true;
+      setIsReady(true);
+    };
+
+    if (!showIntro) {
+      replaySession();
+    } else if (reduced || savedSession.length > 0) {
+      term.write(introLines.join("\r\n"));
+      replaySession();
+    } else {
+      const full = introLines.join("\n");
+      let i = 0;
+      const id = window.setInterval(() => {
+        i += 1;
+        term.write(full[i - 1] === "\n" ? "\r\n" : full[i - 1]);
+        if (i >= full.length) {
+          window.clearInterval(id);
+          window.setTimeout(replaySession, 150);
+        }
+      }, 12);
+    }
+
+    const onData = term.onData((data) => {
+      if (!readyRef.current) return;
+
+      if (data === "\r") {
+        const raw = bufferRef.current;
+        bufferRef.current = "";
+        runCommand(raw);
+        return;
+      }
+
+      if (data === "\u007f") {
+        if (bufferRef.current.length > 0) {
+          bufferRef.current = bufferRef.current.slice(0, -1);
+          term.write("\b \b");
+        }
+        return;
+      }
+
+      if (data === "\u001b[A") {
+        const hist = cmdHistoryRef.current;
+        if (hist.length === 0) return;
+        if (historyIndexRef.current === -1)
+          draftRef.current = bufferRef.current;
+        const nextIdx =
+          historyIndexRef.current === -1
+            ? hist.length - 1
+            : Math.max(0, historyIndexRef.current - 1);
+        historyIndexRef.current = nextIdx;
+        setLine(hist[nextIdx]);
+        return;
+      }
+
+      if (data === "\u001b[B") {
+        if (historyIndexRef.current === -1) return;
+        const nextIdx = historyIndexRef.current + 1;
+        const hist = cmdHistoryRef.current;
+        if (nextIdx >= hist.length) {
+          historyIndexRef.current = -1;
+          setLine(draftRef.current);
+        } else {
+          historyIndexRef.current = nextIdx;
+          setLine(hist[nextIdx]);
+        }
+        return;
+      }
+
+      // ignore other escape sequences (left/right arrows, etc.) for now
+      if (data.charCodeAt(0) === 0x1b) return;
+
+      bufferRef.current += data;
+      term.write(data);
+    });
+
+    const resizeObserver = new ResizeObserver(() => {
+      try {
+        fit.fit();
+      } catch {
+        // ignore fit errors during transient layout states
+      }
+    });
+    resizeObserver.observe(containerRef.current);
+
+    return () => {
+      onData.dispose();
+      resizeObserver.disconnect();
+      term.dispose();
+      termRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (isReady) fitRef.current?.fit();
+  }, [isReady, heightClass]);
 
   return (
     <div
-      className="rounded-lg overflow-hidden border border-black/40 shadow-2xl cursor-text"
+      className="rounded-lg overflow-hidden border border-black/40 shadow-2xl"
       style={{ background: "var(--term-bg)" }}
-      onClick={() => inputRef.current?.focus()}
     >
       <div className="flex items-center gap-1.5 px-3.5 py-3 bg-white/5">
         <span className="w-2.5 h-2.5 rounded-full bg-[var(--term-dot)]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[var(--term-dot)]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[var(--term-dot)]" />
         <span className="ml-2 font-mono-brand text-[11px] text-white/40">
-          karthik@dev ~
+          Karthik@dev ~
         </span>
         {onClose && (
           <button
@@ -281,56 +355,10 @@ export default function Terminal({
         )}
       </div>
       <div
-        ref={scrollRef}
-        className={`font-mono-brand text-[13.5px] leading-[1.75] px-5 py-5 overflow-y-auto ${heightClass}`}
-        style={{ color: "var(--term-text)" }}
-      >
-        {showIntro && <div ref={introRef} />}
-        {!introDone && <span className="term-cursor" />}
-
-        {introDone && (
-          <>
-            {history.map((line, i) => (
-              <div
-                key={i}
-                className={
-                  line.type === "cmd"
-                    ? "text-[var(--term-green)]"
-                    : line.type === "err"
-                      ? "text-[var(--term-error)]"
-                      : "text-[var(--term-text)]/80"
-                }
-              >
-                {line.type === "cmd" ? `$ ${line.text}` : line.text}
-              </div>
-            ))}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                runCommand(value);
-                setValue("");
-              }}
-              className="flex items-center gap-2"
-            >
-              <span className="text-[var(--term-green)]">$</span>
-              <input
-                ref={inputRef}
-                value={value}
-                onChange={(e) => {
-                  setValue(e.target.value);
-                  setHistoryIndex(-1);
-                }}
-                onKeyDown={handleKeyDown}
-                spellCheck={false}
-                autoComplete="off"
-                className="flex-1 bg-transparent outline-none font-mono-brand text-[13.5px]"
-                style={{ color: "var(--term-text)", caretColor: "var(--clr-green)" }}
-                placeholder="type a command…"
-              />
-            </form>
-          </>
-        )}
-      </div>
+        ref={containerRef}
+        onClick={() => termRef.current?.focus()}
+        className={`px-2 py-2 cursor-text ${heightClass}`}
+      />
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import Achievements from '@/components/Achievements';
+import type { Metadata } from "next";
+import Achievements from "@/components/Achievements";
 
 export const metadata: Metadata = {
-  title: 'achievements — Karthik S Kashyap',
+  title: "Achievements — Karthik S Kashyap",
 };
 
 export default function AchievementsPage() {

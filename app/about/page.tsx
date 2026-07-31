@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import About from '@/components/About';
+import type { Metadata } from "next";
+import About from "@/components/About";
 
 export const metadata: Metadata = {
-  title: 'about.md — Karthik S Kashyap',
+  title: "About — Karthik S Kashyap",
 };
 
 export default function AboutPage() {

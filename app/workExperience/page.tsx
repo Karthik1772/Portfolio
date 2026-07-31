@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import WorkExperience from '@/components/WorkExperience';
+import type { Metadata } from "next";
+import WorkExperience from "@/components/WorkExperience";
 
 export const metadata: Metadata = {
-  title: 'build-log — Karthik S Kashyap',
+  title: "Work Experience — Karthik S Kashyap",
 };
 
 export default function WorkExperiencePage() {

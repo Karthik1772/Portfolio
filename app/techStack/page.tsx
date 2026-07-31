@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 import TechStack from "@/components/TechStack";
 
 export const metadata: Metadata = {
-  title: 'stack.json — Karthik S Kashyap',
+  title: "Tech Stack — Karthik S Kashyap",
 };
 
 export default function TechStackPage() {

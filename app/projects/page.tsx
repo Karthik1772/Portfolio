@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import Projects from '@/components/Projects';
+import type { Metadata } from "next";
+import Projects from "@/components/Projects";
 
 export const metadata: Metadata = {
-  title: 'releases — Karthik S Kashyap',
+  title: "Projects — Karthik S Kashyap",
 };
 
 export default function ProjectsPage() {

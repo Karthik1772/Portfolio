@@ -1,59 +1,65 @@
-'use client';
+"use client";
+
+import { Github, ExternalLink, Download, FolderGit2 } from "lucide-react";
 
 const projects = [
   {
-    title: 'Mystery Messenger',
-    tag: 'live',
+    title: "Mystery Messenger",
+    tag: "live",
     description:
-      'Anonymous messaging app with OTP email verification, session auth via NextAuth.js, and Gemini-powered reply suggestions.',
-    tech: 'Next.js · TypeScript · MongoDB · NextAuth.js',
-    github: 'https://github.com/Karthik1772/Mystery_Messager',
-    live: 'https://mystery-messager.vercel.app/',
-    liveLabel: 'live',
+      "Anonymous messaging app with OTP email verification, session auth via NextAuth.js, and Gemini-powered reply suggestions.",
+    tech: "Next.js · TypeScript · MongoDB · NextAuth.js",
+    github: "https://github.com/Karthik1772/Mystery_Messager",
+    live: "https://mystery-messager.vercel.app/",
+    liveLabel: "live",
   },
   {
-    title: 'Bug Blaster',
-    tag: 'v1.0.0',
+    title: "Bug Blaster",
+    tag: "v1.0.0",
     description:
-      'Issue tracker with full CRUD, priority-based sorting, and a filterable dashboard for triaging bugs.',
-    tech: 'React.js · Axios · MongoDB · REST API',
-    github: 'https://github.com/Karthik1772/Bug-Blaster',
+      "Issue tracker with full CRUD, priority-based sorting, and a filterable dashboard for triaging bugs.",
+    tech: "React.js · Axios · MongoDB · REST API",
+    github: "https://github.com/Karthik1772/Bug-Blaster",
   },
   {
-    title: 'Doozy',
-    tag: 'v1.0.0',
-    description: 'A clean, minimal to-do app built to make daily task management genuinely simple.',
-    tech: 'Flutter · Dart',
-    github: 'https://github.com/Karthik1772/Doozy',
-    live: 'https://github.com/Karthik1772/Doozy/releases/download/v1.0.0/Doozy.apk',
-    liveLabel: 'apk',
+    title: "Doozy",
+    tag: "v1.0.0",
+    description:
+      "A clean, minimal to-do app built to make daily task management genuinely simple.",
+    tech: "Flutter · Dart",
+    github: "https://github.com/Karthik1772/Doozy",
+    live: "https://github.com/Karthik1772/Doozy/releases/download/v1.0.0/Doozy.apk",
+    liveLabel: "apk",
   },
   {
-    title: 'Xpenso',
-    tag: 'v1.0.0',
-    description: 'Lightweight expense tracker for logging and reviewing daily spending at a glance.',
-    tech: 'Flutter · Dart',
-    github: 'https://github.com/Karthik1772/Xpenso',
-    live: 'https://github.com/Karthik1772/Xpenso/releases/download/v1.0.0/Xpenso.apk',
-    liveLabel: 'apk',
+    title: "Xpenso",
+    tag: "v1.0.0",
+    description:
+      "Lightweight expense tracker for logging and reviewing daily spending at a glance.",
+    tech: "Flutter · Dart",
+    github: "https://github.com/Karthik1772/Xpenso",
+    live: "https://github.com/Karthik1772/Xpenso/releases/download/v1.0.0/Xpenso.apk",
+    liveLabel: "apk",
   },
   {
-    title: 'Formify',
-    tag: 'v1.0.0',
-    description: 'Modular app for building dynamic forms from reusable components with a clean architecture underneath.',
-    tech: 'Flutter · Dart',
-    github: 'https://github.com/Karthik1772/Formify',
-    live: 'https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk',
-    liveLabel: 'apk',
+    title: "Formify",
+    tag: "v1.0.0",
+    description:
+      "Modular app for building dynamic forms from reusable components with a clean architecture underneath.",
+    tech: "Flutter · Dart",
+    github: "https://github.com/Karthik1772/Formify",
+    live: "https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk",
+    liveLabel: "apk",
   },
   {
-    title: 'XoXo',
-    tag: 'v1.0.0',
-    description: 'Tic-tac-toe, built as an exercise in clean Flutter architecture rather than the game itself.',
-    tech: 'Flutter · Dart',
-    github: 'https://github.com/Karthik1772/XoXo',
-    live: 'https://github.com/Karthik1772/XoXo/releases/download/v1.0.0/XoXo.apk',
-    liveLabel: 'apk',
+    title: "XoXo",
+    tag: "v1.0.0",
+    description:
+      "Tic-tac-toe, built as an exercise in clean Flutter architecture rather than the game itself.",
+    tech: "Flutter · Dart",
+    github: "https://github.com/Karthik1772/XoXo",
+    live: "https://github.com/Karthik1772/XoXo/releases/download/v1.0.0/XoXo.apk",
+    liveLabel: "apk",
   },
 ];
 
@@ -80,7 +86,12 @@ export default function Projects() {
               className="border border-border rounded-md p-6 bg-background hover:-translate-y-1 hover:border-[var(--clr-green)] transition-all"
             >
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-display font-semibold text-lg">
+                <h3 className="font-display font-semibold text-lg flex items-center gap-2">
+                  <FolderGit2
+                    size={17}
+                    style={{ color: "var(--clr-green)" }}
+                    className="shrink-0"
+                  />
                   {p.title}
                 </h3>
                 <span
@@ -104,18 +115,24 @@ export default function Projects() {
                   href={p.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors"
                 >
-                  code ↗
+                  <Github size={13} />
+                  code
                 </a>
                 {p.live && (
                   <a
                     href={p.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors"
+                    className="inline-flex items-center gap-1.5 font-mono-brand text-[12.5px] border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors"
                   >
-                    {p.liveLabel} {p.liveLabel === "apk" ? "↓" : "↗"}
+                    {p.liveLabel === "apk" ? (
+                      <Download size={13} />
+                    ) : (
+                      <ExternalLink size={13} />
+                    )}
+                    {p.liveLabel}
                   </a>
                 )}
               </div>

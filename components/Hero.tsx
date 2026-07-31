@@ -51,7 +51,7 @@ export default function Hero() {
           <div>
             <Terminal />
             <p className="font-mono-brand text-xs text-muted-foreground mt-3 px-1">
-              try {commandList.join(" · ")}
+              Try {commandList.join(" · ")}
             </p>
           </div>
         </div>

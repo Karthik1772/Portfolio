@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import Contact from '@/components/Contact';
+import type { Metadata } from "next";
+import Contact from "@/components/Contact";
 
 export const metadata: Metadata = {
-  title: 'contact — Karthik S Kashyap',
+  title: "Contact — Karthik S Kashyap",
 };
 
 export default function ContactPage() {
